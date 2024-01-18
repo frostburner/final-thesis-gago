@@ -6,6 +6,16 @@ const cors = require('cors');
 app.use(express.json());
 app.use(cors());
 
+app.use('/uploads', express.static('uploads'));
+
+const userRouter = require('./routes/userRoutes');
+app.use('/users', userRouter);
+
+const productRouter = require('./routes/productRoutes');
+app.use('/products', productRouter);
+
+const checkoutRouter = require('./routes/checkoutRoutes');
+app.use('/checkouts', checkoutRouter);
 
 
 
