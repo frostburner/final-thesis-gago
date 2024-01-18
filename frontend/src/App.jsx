@@ -14,7 +14,6 @@ import ProductsByUser from './Pages/Store/ProductsByUser'
 import ProductsUpdate from './Pages/Store/ProductsUpdate'
 import ProductsList from './Pages/Store/ProductsList'
 
-import Navbar from './Components/Navbar/Navbar'
 
 function App() {
   const [authState, setAuthState] = useState({
@@ -81,7 +80,7 @@ function App() {
         <Route path="/productadd" exact element={<ProductsAdd />} />
         <Route path="/productupdate/:id" exact element={<ProductsUpdate />} />
         <Route path="/productbyuser" exact element={<ProductsByUser />} />
-        <Route path="/productlist" exact element={<ProductsList />} /> 
+        <Route path="/productlist" exact element={<ProductsList />} />
         
       </Routes>
     </AuthContext.Provider>
