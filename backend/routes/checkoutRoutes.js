@@ -45,7 +45,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// DISPLAY ALL CHECKOUTS NI LODS WOW
+// DISPLAY ALL CHECKOUTS NI LODS WOW -- TANAN NI YA E DISPLAY
 router.get("/", async (req, res) => {
   try {
     const checkout = await Checkouts.findAll({
@@ -61,6 +61,64 @@ router.get("/", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+// DISPLAY ANG TANAN NGA CHECKOUT NGA GN BAKAL KA CUSTOMER
+router.get("/byUserId/:UserId", async (req, res) => {
+  const UserId = req.params.UserId;
+  const checkout = await Checkouts.findAll({
+    include: [
+      { model: Products, as: "product" },
+      { model: Users, as: "checkoutuser" },
+    ],
+    where: { UserId : UserId }
+  });
+  res.json(checkout);
+
+})
+
+// ARI NAMAN DI YA MA DISPLAY KA SANG TOTAL NGA AMOUNT NGA PURCHASE SANG NAG LOGGED IN NGA USER MAN GYAPON DEPOTA LEZGAWWW
+router.get("/salesByUser/:UserId", async (req, res) => {
+  const UserId = req.params.UserId;
+  try {
+    const checkouts = await Checkouts.findAll({
+      where: { UserId: UserId }
+    })
+
+    const totalSales = checkouts.reduce((total, checkout) => {
+      return total + checkout.total;
+    }, 0);
+
+    res.status(200).json({ checkouts, totalSales });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// DIRI NAMAN MA DISPLAY ANG TOTAL NGA EARNINGS, EARNINGS PRE HA SANG ARTIST NGA NAG LOGGED IN.
+router.get("/earnings/:ProductId", async (req, res) => {
+  const ProductId = req.params.ProductId;
+  try {
+    const product = await Products.findByPk(ProductId);
+    if (!product) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    const checkouts = await Checkouts.findAll({
+      where: { ProductId: ProductId }
+    });
+
+    const totalEarnings = checkouts.reduce((total, checkout) => {
+      return total + checkout.total;
+    }, 0);
+    
+    res.status(200).json({ product, checkouts, totalEarnings });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 // DISPLAY TOTAL SALES
 router.get("/sales", async (req, res) => {

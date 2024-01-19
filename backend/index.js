@@ -19,6 +19,7 @@ app.use('/checkouts', checkoutRouter);
 
 
 
+
 db.sequelize.sync().then(()=>{
     app.listen(8080, ()=>{
         console.log("Server running on post 8080")

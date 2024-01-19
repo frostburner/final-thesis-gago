@@ -1,18 +1,18 @@
-import { Route, Routes } from "react-router-dom";
 import { AuthContext } from "./Helpers/AuthContext";
 import React, { useState, useEffect } from "react";
+import { Router, Route, Routes } from "react-router-dom";
 import axios from "axios";
 
 import Login from './Pages/Login'
 import Signup from './Pages/Signup'
-import Store from './Pages/Store/Store'
+import Store from "./Pages/Store/Store";
 import StoreCheckout from './Pages/Store/StoreCheckout'
 import StoreCheckoutList from './Pages/Store/StoreCheckoutList'
 import StoreDetails from './Pages/Store/StoreDetails'
-import ProductsAdd from './Pages/Store/ProductsAdd'
-import ProductsByUser from './Pages/Store/ProductsByUser'
-import ProductsUpdate from './Pages/Store/ProductsUpdate'
-import ProductsList from './Pages/Store/ProductsList'
+import ProductsList from "./Pages/Store/ProductsList";
+import ProductsAdd from "./Pages/Store/ProductsAdd";
+import ProductsByUser from "./Pages/Store/ProductByUser";
+import ProductsUpdate from "./Pages/Store/ProductUpdates";
 
 
 function App() {
@@ -74,13 +74,16 @@ function App() {
         {/* STORE */}
         <Route path="/store" exact element={<Store />} />
         <Route path="/storecheckout/:id" exact element={<StoreCheckout />} />
-        <Route path="/storecheckoutlist" exact element={<StoreCheckoutList />} />
+        <Route path="/storecheckoutlist/:id" exact element={<StoreCheckoutList />} />
         <Route path="/storedetails/:id" exact element={<StoreDetails />} />
+        {/*
+        
+
         {/* STORE PRODUCTS ADD, UPDATE, DISPLAYBY USERID */}
-        <Route path="/productadd" exact element={<ProductsAdd />} />
-        <Route path="/productupdate/:id" exact element={<ProductsUpdate />} />
-        <Route path="/productbyuser" exact element={<ProductsByUser />} />
-        <Route path="/productlist" exact element={<ProductsList />} />
+         <Route path="/productslist" exact element={<ProductsList />} />
+         <Route path="/productadd" exact element={<ProductsAdd />} />
+         <Route path="/productbyuser" exact element={<ProductsByUser />} />
+         <Route path="/productupdate/:id" exact element={<ProductsUpdate />} />
         
       </Routes>
     </AuthContext.Provider>

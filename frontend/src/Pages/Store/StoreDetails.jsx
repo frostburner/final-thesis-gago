@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
 
 const StoreDetails = () => {
@@ -24,15 +24,36 @@ const StoreDetails = () => {
   return (
     <>
     <Navbar />
-      <div className="card" key={product.id}>
-        {product.image && (<img src={`http://localhost:8080/uploads/${product.image}`} alt="" />)}
-        <h2>{product.name}</h2>
-        <h2>{product.description}</h2>
-        <h2>{product.quantity}</h2>
-        <h2>&#8369;{product.price}</h2>
-        <h2>{user.username}</h2>
-        <button onClick={(()=> navigate(`/storecheckout/${product.id}`))}>Checkout</button>
+    <div className="px-5 mt-5">
+      <div className="mb-3">
+        <Link path to="/store">
+        <span>Back</span>
+        </Link>
       </div>
+      <div className="mb-3">
+        <h3>Product Details</h3>
+      </div>
+      <div className="col-8 mb-3">
+        <div className="card" key={product.id}>
+          <img
+            src={`http://localhost:8080/uploads/${product.image}`}
+            className="card-img-top display-img"
+            alt=""
+          />
+          <div className="card-body">
+            <p>{product.id}</p>
+            <div className="d-flex justify-content-between align-items-center mb-2">
+              <h2 className="card-title">{product.name}</h2>
+              <h2 className="card-title">&#8369;{product.price}</h2>
+            </div>
+            <h5 className="card-subtitle">{product.quantity} left</h5>
+            <p className="fst-italic">{product.description}</p>
+            <p className="card-text">{user.username}</p>
+            <button className="col-12 mt-3" onClick={(()=> navigate(`/storecheckout/${product.id}`))}>Checkout</button>
+          </div>
+        </div>
+      </div>
+    </div>
     </>
   );
 };

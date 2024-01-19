@@ -1,0 +1,15 @@
+nav{
+    background-color: #00a693;
+    color: #000000;
+}
+nav li {
+    cursor: pointer;
+}
+nav ul{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+nav ul li{
+    gap: 10px;
+}

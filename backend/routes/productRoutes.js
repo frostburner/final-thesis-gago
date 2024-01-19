@@ -111,7 +111,7 @@ router.put("/update/:id", async (req, res) => {
       }
       product.name = name;
       product.description = description;
-      product.description = quantity;
+      product.quantity = quantity;
       product.price = price;
 
       await product.save();

@@ -1,7 +1,7 @@
-import React,{useState, useContext} from 'react';
-import axios from 'axios';
-import {useNavigate, Link} from 'react-router-dom';
-import {AuthContext} from '../Helpers/AuthContext';
+import React, { useState, useContext } from "react";
+import axios from "axios";
+import { useNavigate, Link } from "react-router-dom";
+import { AuthContext } from "../Helpers/AuthContext";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,7 +15,9 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/users/login",formData);
+        "http://localhost:8080/users/login",
+        formData
+      );
 
       if (response.data.error) {
         console.log(response.data.error);
@@ -50,30 +52,37 @@ const Login = () => {
   };
   return (
     <>
-    <form onSubmit={handleSubmit} autoComplete="off">
-            <div >
-              <label>Username</label>
-              <input
-                type="text"
-                name="username"
-                value={formData.username}
-                onChange={handleChange}
-              />
-            </div>
-            <div >
-              <label>Password</label>
-              <input
-                type="text"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-            </div>
-            <button type='submit'>Submit</button>
-            Don't have an account? <Link path to='/signup'>Sign Up Here</Link>
-          </form>
+      <form onSubmit={handleSubmit} autoComplete="off">
+        <div className="d-flex align-items-center flex-column gap-2 justify-content-center vh-100">
+          <div className="mb-3">
+            <label className="form-label">Username</label>
+            <input
+              type="text"
+              name="username"
+              class="form-control"
+              value={formData.username}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Password</label>
+            <input
+              type="text"
+              name="password"
+              class="form-control"
+              value={formData.password}
+              onChange={handleChange}
+            />
+          </div>
+          <button type="submit">Submit</button>
+          Don't have an account?{" "}
+          <Link path to="/signup">
+            Sign Up Here
+          </Link>
+        </div>
+      </form>
     </>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
