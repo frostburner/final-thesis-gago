@@ -17,6 +17,12 @@ app.use('/products', productRouter);
 const checkoutRouter = require('./routes/checkoutRoutes');
 app.use('/checkouts', checkoutRouter);
 
+const eventRouter = require('./routes/eventRoutes');
+app.use('/events', eventRouter);
+
+const eventCheckoutRouter = require('./routes/eventCheckoutRoutes');
+app.use('/eventCheckouts', eventCheckoutRouter);
+
 
 
 

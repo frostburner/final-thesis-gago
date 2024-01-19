@@ -56,7 +56,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// DISPALY SPECIFIC DETAILS OF PRODUCT
+// DISPLAY SPECIFIC DETAILS OF PRODUCT
 router.get("/view/:id", async (req, res) => {
   const id = req.params.id;
   try {

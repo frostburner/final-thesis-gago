@@ -13,6 +13,12 @@ import ProductsList from "./Pages/Store/ProductsList";
 import ProductsAdd from "./Pages/Store/ProductsAdd";
 import ProductsByUser from "./Pages/Store/ProductByUser";
 import ProductsUpdate from "./Pages/Store/ProductUpdates";
+import EventsList from "./Pages/Event/EventsList";
+import EventsAdd from "./Pages/Event/EventsAdd";
+import EventDetails from "./Pages/Event/EventDetails";
+import EventCheckout from "./Pages/Event/EventCheckout";
+import EventByUser from "./Pages/Event/EventByUser";
+import EventUpdates from "./Pages/Event/EventUpdates";
 
 
 function App() {
@@ -76,7 +82,6 @@ function App() {
         <Route path="/storecheckout/:id" exact element={<StoreCheckout />} />
         <Route path="/storecheckoutlist/:id" exact element={<StoreCheckoutList />} />
         <Route path="/storedetails/:id" exact element={<StoreDetails />} />
-        {/*
         
 
         {/* STORE PRODUCTS ADD, UPDATE, DISPLAYBY USERID */}
@@ -84,6 +89,15 @@ function App() {
          <Route path="/productadd" exact element={<ProductsAdd />} />
          <Route path="/productbyuser" exact element={<ProductsByUser />} />
          <Route path="/productupdate/:id" exact element={<ProductsUpdate />} />
+
+         {/* EVENT ADD, UPDATE, DISPLAY BY USERID */}
+         <Route path="/eventslist" exact element={<EventsList />} />
+         <Route path="/eventadd" exact element={<EventsAdd />} />
+         <Route path="/eventdetails/:id" exact element={<EventDetails />} />
+
+         <Route path="/eventcheckout/:id" exact element={<EventCheckout />} />
+         <Route path="/eventbyuser" exact element={<EventByUser />} />
+         <Route path="/eventupdate/:id" exact element={<EventUpdates />} />
         
       </Routes>
     </AuthContext.Provider>

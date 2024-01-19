@@ -26,9 +26,11 @@ const Navbar = () => {
         <div>
           <div className="d-flex flex-row gap-4">
             <ul className="navbar-nav ms-auto mb-2 text-white gap-3">
+            <li className="nav-item" onClick={(()=> navigate('/eventslist'))}>Events</li>
               <li className="nav-item" onClick={(()=> navigate('/store'))}>Store</li>
               {/* <li className="nav-item" onClick={(()=> navigate('/productslist'))}>Product List</li> */}
               <li className="nav-item" onClick={(()=> navigate('/productbyuser'))}>My Products</li>
+              <li className="nav-item" onClick={(()=> navigate('/eventbyuser'))}>My Events</li>
               <li className="nav-item" onClick={(()=> navigate(`/storecheckoutlist/${id}`))}>Purchase History</li>
             </ul>
             <ul className="navbar-nav mb-2 text-white gap-2">

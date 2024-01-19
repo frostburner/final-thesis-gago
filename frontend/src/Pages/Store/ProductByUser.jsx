@@ -50,6 +50,7 @@ const ProductsByUser = () => {
       console.error("Error deleting user:", error);
     }
   };
+  
   return (
     <>
       <Navbar />

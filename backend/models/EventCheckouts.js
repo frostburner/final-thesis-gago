@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) =>{
-    const Checkouts = sequelize.define("Checkouts", {
+    const EventCheckouts = sequelize.define("EventCheckouts", {
         firstName:{
             type: DataTypes.STRING,
             allowNull: false
@@ -33,10 +33,10 @@ module.exports = (sequelize, DataTypes) =>{
             allowNull: false
         },
     });
-    Checkouts.associate = (models) => {
-        Checkouts.belongsTo(models.Users, { foreignKey: 'UserId', as: 'checkoutuser' });
-        Checkouts.belongsTo(models.Products, { foreignKey: 'ProductId', as: 'product' });
+    EventCheckouts.associate = (models) => {
+        EventCheckouts.belongsTo(models.Users, { foreignKey: 'UserId', as: 'eventcheckoutuser' });
+        EventCheckouts.belongsTo(models.Events, { foreignKey: 'EventId', as: 'event' });
     };
     
-    return Checkouts
+    return EventCheckouts
 }

@@ -3,23 +3,24 @@ import axios from "axios";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
 
-const ProductsUpdate = () => {
+function EventUpdates() {
   const navigate = useNavigate();
-  const [product, setProduct] = useState([]);
+  const [events, setEvents] = useState([]);
   const { id } = useParams();
   const [formData, setFormData] = useState({
-    name: "",
+    title: "",
     description: "",
     quantity: "",
     price: "",
   });
+
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/products/view/${id}`)
+      .get(`http://localhost:8080/events/byId/${id}`)
       .then((response) => {
-        setProduct(response.data);
+        setEvents(response.data);
         setFormData({
-            name: response.data.name,
+            title: response.data.title,
             description: response.data.description,
             quantity: response.data.quantity.toString(),
             price: response.data.price.toString(),
@@ -38,7 +39,7 @@ const ProductsUpdate = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.put(`http://localhost:8080/products/update/${id}`, formData);
+      await axios.put(`http://localhost:8080/events/update/${id}`, formData);
       setTimeout(() => {
         setTimeout(() => {
           navigate(-1);
@@ -50,30 +51,31 @@ const ProductsUpdate = () => {
       }, 2000);
     }
   };
+
   return (
     <>
     <Navbar />
     <div className="px-5 mt-5">
       <div className="mb-3">
-        <Link path to="/store">
+        <Link path to="/eventslist">
         <span>Back</span>
         </Link>
       </div>   
       <div className="mb-3">
-        <h3>Update Product</h3>
+        <h3>Update Event</h3>
       </div>
       <div className="col-8 mb-3">
         <form onSubmit={handleSubmit} autoComplete="off">
-          {product.image && (
-            <img src={`http://localhost:8080/uploads/${product.image}`} className="mb-3 display-img" alt="" />
+          {events.image && (
+            <img src={`http://localhost:8080/uploads/${events.image}`} className="mb-3 display-img" alt="" />
           )}
           <div className="mb-3">
-            <label className="form-label">Name</label>
+            <label className="form-label">Title</label>
             <input
               type="text"
-              name="name"
+              name="title"
               className="form-control"
-              value={formData.name}
+              value={formData.title}
               onChange={handleChange}
             />
           </div>
@@ -111,9 +113,9 @@ const ProductsUpdate = () => {
         </form>
       </div>
     </div>
-
+    
     </>
-  );
-};
+  )
+}
 
-export default ProductsUpdate;
+export default EventUpdates

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { AuthContext } from '../../Helpers/AuthContext'
-import {useNavigate } from 'react-router-dom';
+import {useNavigate, Link } from 'react-router-dom';
 import Navbar from '../../Components/Navbar/Navbar';
 import axios from 'axios';
 
@@ -54,30 +54,36 @@ const ProductsAdd = () => {
         <span>Back</span>
         </Link>
       </div>
-    <form onSubmit={handleSubmit} autoComplete="off">
-            <div >
-              <label>Name</label>
-              <input type="text" name="name" value={formData.name} onChange={handleChange}
-              />
-            </div>
-            <div >
-              <label>Description</label>
-              <input type="text" name="description" value={formData.description} onChange={handleChange}/>
-            </div>
-            <div >
-              <label>Quantity</label>
-              <input type="number" name="quantity" value={formData.quantity} onChange={handleChange}/>
-            </div>
-            <div >
-              <label>Price</label>
-              <input type="number" name="price" value={formData.price} onChange={handleChange}/>
-            </div>
-            <div >
-              <label>Image</label>
-              <input type="file" name="image" onChange={handleFileChange}/>
-            </div>
-            <button type='submit'>Submit</button>
-          </form>
+      <div className="mb-3">
+        <h3>Create Product</h3>
+      </div>
+      <div className="border rounded p-3 mb-3">
+        <form onSubmit={handleSubmit} className="p-4" autoComplete="off">
+          <div className="mb-3">
+            <label className="form-label">Name</label>
+            <input type="text" name="name" className="form-control" placeholder="Enter Name" value={formData.name} onChange={handleChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label>Description</label>
+            <input type="text" name="description" className="form-control" placeholder="Enter Description" value={formData.description} onChange={handleChange}/>
+          </div>
+          <div className="mb-3">
+            <label>Quantity</label>
+            <input type="number" name="quantity" className="form-control" placeholder="Enter Quuantity" value={formData.quantity} onChange={handleChange}/>
+          </div>
+          <div className="mb-3">
+            <label>Price</label>
+            <input type="number" name="price" className="form-control" placeholder="Enter Price" value={formData.price} onChange={handleChange}/>
+          </div>
+          <div className="mb-3">
+            <label>Image</label>
+            <input type="file" name="image" className="form-control" placeholder="Upload Image" onChange={handleFileChange}/>
+          </div>
+          <button type='submit'>Submit</button>
+        </form>
+      </div>
+
     </div>
     </>
     

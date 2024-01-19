@@ -25,14 +25,14 @@ const Store = () => {
   return (
     <>
       <Navbar />
-      <div className="px-5 mt-3"><button className="mb-3" onClick={(() => navigate('/productadd'))}>Sell Merch Now</button></div>
+      <div className="px-5 mt-5"><button className="mb-3" onClick={(() => navigate('/productadd'))}>Sell Merch</button></div>
       <div className="row px-5">
         {allProducts.map((product) => (
           <div className="col-sm-4" key={product.id}>
             <div className="card mb-3">
               <img
                 src={`http://localhost:8080/uploads/${product.image}`}
-                className="card-img-top card-img"
+                className="card-img-top card-img" 
                 alt=""
               />
               <div className="card-body">
