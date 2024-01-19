@@ -19,6 +19,7 @@ import EventDetails from "./Pages/Event/EventDetails";
 import EventCheckout from "./Pages/Event/EventCheckout";
 import EventByUser from "./Pages/Event/EventByUser";
 import EventUpdates from "./Pages/Event/EventUpdates";
+import Homepage from "./Components/Homepage";
 
 
 function App() {
@@ -75,6 +76,7 @@ function App() {
     <AuthContext.Provider value={{authState, setAuthState}}>
       <Routes>
         <Route path="/" exact element={<Login />} />
+        <Route path="/home" exact element={<Homepage />} />
         <Route path="/signup" exact element={<Signup />} />
 
         {/* STORE */}

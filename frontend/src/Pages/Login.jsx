@@ -32,8 +32,7 @@ const Login = () => {
 
         // Log information after successful login
         console.log("Data stored in localStorage:", response.data);
-
-        navigate("/store");
+        navigate("/home");
       }
     } catch (error) {
       if (

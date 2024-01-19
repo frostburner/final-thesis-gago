@@ -22,11 +22,12 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid px-5">
-        <Link path to="/store" className="navbar-brand text-white fw-bold">AudioHive</Link>
+        <Link path to="/home" className="navbar-brand text-white fw-bold">AudioHive</Link>
         <div>
           <div className="d-flex flex-row gap-4">
             <ul className="navbar-nav ms-auto mb-2 text-white gap-3">
-            <li className="nav-item" onClick={(()=> navigate('/eventslist'))}>Events</li>
+              <li className="nav-item" onClick={(()=> navigate('/home'))}>Home</li>
+              <li className="nav-item" onClick={(()=> navigate('/eventslist'))}>Events</li>
               <li className="nav-item" onClick={(()=> navigate('/store'))}>Store</li>
               {/* <li className="nav-item" onClick={(()=> navigate('/productslist'))}>Product List</li> */}
               <li className="nav-item" onClick={(()=> navigate('/productbyuser'))}>My Products</li>

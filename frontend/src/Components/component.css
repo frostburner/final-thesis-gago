@@ -1,0 +1,11 @@
+.events-image {
+    width: 600px;
+    height: 400px;
+}
+
+.events-image-column {
+    background: fill;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+}
