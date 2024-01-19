@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const { Users } = require("../models");
-
 const bcrypt = require("bcrypt");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 const { sign } = require("jsonwebtoken");
@@ -71,5 +70,61 @@ router.post("/", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+// GET ALL USERS NA DI TANAN
+router.get("/", async (req, res) => {
+  const listofUsers = await Users.findAll()
+  res.json(listofUsers);
+});
+
+// UPDATING SANG USERS
+router.put("/update/:id", async (req, res) => {
+  const id = req.params.id;
+  const { username, password, role} = req.body;
+
+  try {
+      const user = await Users.findByPk(id);
+
+      if (!user) {
+          return res.status(404).json({ error: "User not found."});
+      }
+      user.username = username;
+      user.role = role;
+
+      const hashedPassword = await bcrypt.hash(password, 10);
+      user.password = hashedPassword;
+
+      await user.save();
+      res.json(user);
+  } catch (error) {
+      console.error("Error updating user:", error);
+      res.status(500).json({ error: "Internal server error"});
+  }
+});
+
+// DELETE USERS
+router.delete("/delete/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+      const user = await Users.findByPk(id);
+
+      if (!user) {
+          return res.status(404).json({ error: "User not found."});
+      }
+      await user.destroy();
+      res.json(user);
+  } catch (error) {
+      console.error("Error deleting user:", error);
+      res.status(500).json({error: "Internal server error"});
+  }
+
+})
+
+// GET USER BY ID
+router.get("/byId/:id", async (req, res) => {
+  const id = req.params.id;
+  const user = await Users.findByPk(id);
+  res.json(user);
+})
 
 module.exports = router;

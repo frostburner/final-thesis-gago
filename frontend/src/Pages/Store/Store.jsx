@@ -22,15 +22,25 @@ const Store = () => {
     <>
     <Navbar />
       <div className="store-container">
+        <div className="store-banner">
+          <h1>Audio Hive Merch</h1>
+          <p>Want to sell your merch?</p>
         <button onClick={(() => navigate('/productadd'))}>Sell Merch Now</button>
+        </div>
+      <div className="store-wrapper">
       {allProducts.map((product) => (
-        <div className="card" key={product.id} >
+        <div className="store-card" key={product.id} >
+          <div className="store-card-img">
           <img src={`http://localhost:8080/uploads/${product.image}`} alt="" />
+          </div>
+          <div className="store-text">
           <h2>{product.name}</h2>
           <h2>{product.user.username}</h2>
           <button onClick={(()=> navigate(`/storedetails/${product.id}`))}>View</button>
+          </div>
         </div>
       ))}
+      </div>
       </div>
     </>
   );

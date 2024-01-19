@@ -16,8 +16,8 @@ module.exports = (sequelize, DataTypes) =>{
         timestamps: false // Disable automatic timestamps
     });
     Users.associate = (models) => {
-        Users.belongsTo(models.Products, { foreignKey: 'id', as: 'user' });
-        Users.belongsTo(models.Checkouts, { foreignKey: 'id', as: 'checkoutuser' });
+        Users.hasMany(models.Products, {foreignKey: "id"});
+        Users.hasMany(models.Checkouts, {foreignKey: "id"});
     };
     return Users
 }

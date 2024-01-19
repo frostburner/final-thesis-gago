@@ -50,7 +50,7 @@ router.get("/", async (req, res) => {
   try {
     const checkout = await Checkouts.findAll({
       include: [
-        { model: Users, as: "checkoutuser" },
+        { model: Users, as: "user" },
         { model: Products, as: "product" },
       ],
     });

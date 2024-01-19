@@ -52,8 +52,9 @@ const StoreCheckoutList = () => {
           <p>{checkout.zipcode}</p>
           <p>{checkout.email}</p>
           <p>{checkout.total}</p>
-          <p>{checkout.checkoutuser.username}</p>
+          <p>{checkout.user.username}Halaman</p>
           <p>{checkout.product.name}</p>
+          <p>{checkout.user.name}</p>
           <button onClick={(()=> handleDelete(checkout.id))}>Delete</button>
         </div>
       ))}

@@ -23,6 +23,7 @@ const Navbar = () => {
         <button onClick={(()=> navigate('/productlist'))}>Product List </button>
         <button onClick={(()=> navigate('/productbyuser'))}>Product By Current User </button>
         <button onClick={(()=> navigate('/storecheckoutlist'))}>Checkout List </button>
+        <button onClick={(()=> navigate('/allgroup'))}>All Gorup </button>
     </div>
   )
 }

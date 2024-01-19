@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) =>{
         },
     });
     Checkouts.associate = (models) => {
-        Checkouts.belongsTo(models.Users, { foreignKey: 'UserId', as: 'checkoutuser' });
+        Checkouts.belongsTo(models.Users, { foreignKey: 'UserId', as: 'user' });
         Checkouts.belongsTo(models.Products, { foreignKey: 'ProductId', as: 'product' });
     };
     return Checkouts

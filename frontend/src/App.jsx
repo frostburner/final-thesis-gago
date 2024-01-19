@@ -14,6 +14,10 @@ import ProductsByUser from './Pages/Store/ProductsByUser'
 import ProductsUpdate from './Pages/Store/ProductsUpdate'
 import ProductsList from './Pages/Store/ProductsList'
 
+import Chat from "./Pages/Chat/Chat";
+import AddGroup from "./Pages/Chat/AddGroup";
+import AllGroup from "./Pages/Chat/AllGroup";
+
 
 function App() {
   const [authState, setAuthState] = useState({
@@ -81,7 +85,11 @@ function App() {
         <Route path="/productupdate/:id" exact element={<ProductsUpdate />} />
         <Route path="/productbyuser" exact element={<ProductsByUser />} />
         <Route path="/productlist" exact element={<ProductsList />} />
-        
+        {/* <Chatpage /> */}
+        <Route path="/chat/:id" exact element={<Chat />} />
+        <Route path="/addgroup" exact element={<AddGroup />} />
+        <Route path="/allgroup" exact element={<AllGroup />} />
+  
       </Routes>
     </AuthContext.Provider>
     </>

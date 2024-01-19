@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) =>{
 
     Products.associate = (models) => {
         Products.belongsTo(models.Users, { foreignKey: 'UserId', as: 'user' });
-        Products.belongsTo(models.Checkouts, { foreignKey: 'id', as: 'product' });
+        Products.hasOne(models.Checkouts, { foreignKey: 'ProductId'});
     };
 
     return Products
