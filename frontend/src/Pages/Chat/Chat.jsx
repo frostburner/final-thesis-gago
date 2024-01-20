@@ -55,7 +55,7 @@ const Chat = () => {
         ))}
       </div>
       <div className="message-input-form">
-        <textarea placeholder="Say hi..."
+        <textarea placeholder="Say hi...  "
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}></textarea>
         <button onClick={handleSendMessage}>Send</button>
