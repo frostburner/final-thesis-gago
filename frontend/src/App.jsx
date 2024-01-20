@@ -1,18 +1,18 @@
-import { Route, Routes } from "react-router-dom";
 import { AuthContext } from "./Helpers/AuthContext";
 import React, { useState, useEffect } from "react";
+import { Router, Route, Routes } from "react-router-dom";
 import axios from "axios";
 
 import Login from './Pages/Login'
 import Signup from './Pages/Signup'
-import Store from './Pages/Store/Store'
-import StoreCheckout from './Pages/Store/StoreCheckout'
-import StoreCheckoutList from './Pages/Store/StoreCheckoutList'
-import StoreDetails from './Pages/Store/StoreDetails'
-import ProductsAdd from './Pages/Store/ProductsAdd'
-import ProductsByUser from './Pages/Store/ProductsByUser'
-import ProductsUpdate from './Pages/Store/ProductsUpdate'
-import ProductsList from './Pages/Store/ProductsList'
+import Chat from './Pages/Chat/Chat'
+import AddGroup from "./Pages/Chat/AddGroup";
+import AllGroup from './Pages/Chat/AllGroup';
+import ChatBody from './Pages/Chat/ChatBody';
+
+// import Homepage from "./Components/Homepage";
+
+
 
 
 function App() {
@@ -70,17 +70,10 @@ function App() {
       <Routes>
         <Route path="/" exact element={<Login />} />
         <Route path="/signup" exact element={<Signup />} />
-
-        {/* STORE */}
-        <Route path="/store" exact element={<Store />} />
-        <Route path="/storecheckout/:id" exact element={<StoreCheckout />} />
-        <Route path="/storecheckoutlist" exact element={<StoreCheckoutList />} />
-        <Route path="/storedetails/:id" exact element={<StoreDetails />} />
-        {/* STORE PRODUCTS ADD, UPDATE, DISPLAYBY USERID */}
-        <Route path="/productadd" exact element={<ProductsAdd />} />
-        <Route path="/productupdate/:id" exact element={<ProductsUpdate />} />
-        <Route path="/productbyuser" exact element={<ProductsByUser />} />
-        <Route path="/productlist" exact element={<ProductsList />} />
+        <Route path="/chat/:id" exact element={<Chat />} />
+        <Route path="/addgroup" exact element={<AddGroup />} />
+        <Route path="/allgroup" exact element={<AllGroup />} />
+        <Route path="/chatbody" exact element={<ChatBody />} />
         
       </Routes>
     </AuthContext.Provider>

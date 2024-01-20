@@ -1,0 +1,98 @@
+/* Chat Container */
+.chat-container {
+    background-color: #f5f5f5;
+    padding: 20px;
+    height: 400px;
+    overflow-y: scroll;
+  }
+  
+  /* Chat Messages */
+  .chats {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .chats h2 {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .chats p {
+    font-size: 12px;
+    color: #666;
+  }
+  
+  /* Message Input Form */
+  .message-input-form {
+    display: flex;
+    margin-top: 20px;
+  }
+  
+  .message-input-form textarea {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+    background-color: #f9f9f9;
+    color: black;
+  }
+  
+  .message-input-form .form-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .message-input-form button {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  
+  .message-input-form button:hover {
+    background-color: #45a049;
+  }
+  
+  .create-group-btn {
+    background-color: #00a986;
+  }
+  
+  .create-group-btn:hover {
+    background-color: #c7fff3;
+    color: black;
+    border: none;
+  }
+  
+  .group-list {
+    width: 50%;
+    cursor: pointer;
+  }
+  
+  .group-item:hover {
+    background-color: aquamarine;
+  }
+
+  .form-input{
+    background: #fff;
+    border-radius: 5px;
+    border: aqua 1px;
+    color: black;
+  }
+
+  .submit-button{
+    background-color: #00a693;
+  }
+
+  .submit-button:hover{
+    background-color: #c7fff3;
+    color: black;
+    border: none;
+  }
