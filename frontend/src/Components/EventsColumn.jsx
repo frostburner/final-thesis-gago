@@ -20,7 +20,7 @@ function EventsColumn () {
   });
 
   // Get the first four events
-  const latestEvents = sortedEvents.slice(0, 4);
+  const latestEvents = sortedEvents.slice(0, 4);  
 
   return (
     <div className="bg-light vh-100">

@@ -23,6 +23,11 @@ app.use('/events', eventRouter);
 const eventCheckoutRouter = require('./routes/eventCheckoutRoutes');
 app.use('/eventCheckouts', eventCheckoutRouter);
 
+const postRouter = require('./routes/postRoutes');
+app.use('/posts', postRouter);
+
+const commentRouter = require('./routes/commentRoutes');
+app.use('/comments', commentRouter);
 
 
 

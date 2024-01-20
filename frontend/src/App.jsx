@@ -20,6 +20,7 @@ import EventCheckout from "./Pages/Event/EventCheckout";
 import EventByUser from "./Pages/Event/EventByUser";
 import EventUpdates from "./Pages/Event/EventUpdates";
 import Homepage from "./Components/Homepage";
+import PostDetails from "./Pages/Post/PostDetails";
 
 
 function App() {
@@ -100,6 +101,9 @@ function App() {
          <Route path="/eventcheckout/:id" exact element={<EventCheckout />} />
          <Route path="/eventbyuser" exact element={<EventByUser />} />
          <Route path="/eventupdate/:id" exact element={<EventUpdates />} />
+
+         {/* POST ADD, UPDATE, DISPLAY BY USERID */}
+         <Route path="/postdetails/:PostId" exact element={<PostDetails />} />
         
       </Routes>
     </AuthContext.Provider>
