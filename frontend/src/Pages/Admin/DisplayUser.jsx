@@ -28,6 +28,30 @@ function DisplayUser() {
     }
   };
 
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this user?"
+    );
+    if (confirmDelete) {
+      try {
+        await axios.delete(`http://localhost:8080/users/delete/${id}`);
+        setListofUsers((prevUsers) =>
+          prevUsers.filter((user) => user.id !== id)
+        );
+        setAlert({ type: "success", message: "User deleted successfully!" });
+        console.log("deleted");
+      } catch (error) {
+        if (
+          error.response &&
+          error.response.status >= 400 &&
+          error.response.status <= 500
+        ) {
+          setAlert({ type: "danger", message: "Error deleting user." });
+        }
+      }
+    }
+  };
+
   return (
     <div className="d-flex w-100">
       <Sidebar />
@@ -62,7 +86,12 @@ function DisplayUser() {
                     >
                       Edit
                     </button>
-                    <button className="mb-3 bg-danger">Delete</button>
+                    <button
+                      className="mb-3 bg-danger"
+                      onClick={() => handleDelete(user.id)}
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}

@@ -44,6 +44,23 @@ router.put("/update/:id", async (req, res) => {
   }
 });
 
+// delete a user
+router.delete("/delete/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const user = await Users.findByPk(id);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found." });
+    }
+    await user.destroy();
+    res.json(user);
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 // LOGIN VALIDATE IF USER EXISTS
 router.post("/login", async (req, res) => {
   try {
