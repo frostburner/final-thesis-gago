@@ -29,6 +29,7 @@ import AllGroup from "./Pages/Chat/AllGroup";
 import AdminDashboard from "./Pages/Admin/adminDashboard";
 import DisplayUser from "./Pages/Admin/DisplayUser";
 import CreateUser from "./Pages/Admin/CreateUser.jsx";
+import EditUser from "./Pages/Admin/EditUser.jsx";
 
 function App() {
   const [authState, setAuthState] = useState({
@@ -124,6 +125,7 @@ function App() {
           <Route path="/adminDashboard" exact element={<AdminDashboard />} />
           <Route path="/displayUser" exact element={<DisplayUser />} />
           <Route path="/createUser" exact element={<CreateUser />} />
+          <Route path="/editUser/:id" exact element={<EditUser />} />
         </Routes>
       </AuthContext.Provider>
     </>

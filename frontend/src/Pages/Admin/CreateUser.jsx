@@ -38,7 +38,7 @@ function CreateUser() {
         setAlert({ type: "success", message: "User created successfully!" });
         setTimeout(() => {
           navigate("/DisplayUser");
-        }, 1000);
+        }, 1500);
       });
     } catch (error) {
       if (
@@ -122,7 +122,7 @@ function CreateUser() {
                   value={data.role}
                   onChange={handleInputChange}
                 >
-                  <option value="">Select a role</option>
+                  <option>Select a role</option>
                   <option value="0">Admin</option>
                   <option value="1">Artist</option>
                   <option value="2">Event Organizer</option>

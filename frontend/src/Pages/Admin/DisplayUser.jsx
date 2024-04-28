@@ -54,7 +54,14 @@ function DisplayUser() {
                   <td>{user.username}</td>
                   <td>{getRoleText(user.role)}</td>
                   <td className="d-flex gap-2">
-                    <button className="mb-3 bg-success">Edit</button>
+                    <button
+                      className="mb-3 bg-success"
+                      onClick={() => {
+                        navigate(`/editUser/${user.id}`);
+                      }}
+                    >
+                      Edit
+                    </button>
                     <button className="mb-3 bg-danger">Delete</button>
                   </td>
                 </tr>

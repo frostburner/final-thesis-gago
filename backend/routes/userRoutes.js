@@ -12,6 +12,38 @@ router.get("/", async (req, res) => {
   res.json(listofUsers);
 });
 
+// get a specific user
+router.get("/byId/:id", async (req, res) => {
+  const id = req.params.id;
+  const user = await Users.findByPk(id);
+  res.json(user);
+});
+
+// edit a user
+router.put("/update/:id", async (req, res) => {
+  const id = req.params.id;
+  const { username, password, role } = req.body;
+
+  try {
+    const user = await Users.findByPk(id);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found." });
+    }
+    user.username = username;
+    user.role = role;
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    user.password = hashedPassword;
+
+    await user.save();
+    res.json(user);
+  } catch (error) {
+    console.error("Error updating user:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 // LOGIN VALIDATE IF USER EXISTS
 router.post("/login", async (req, res) => {
   try {
@@ -51,9 +83,9 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/auth", validateToken, (req, res) => {
-  res.json(req.user);
-});
+// router.get("/auth", validateToken, (req, res) => {
+//   res.json(req.user);
+// });
 
 //POST OR REGISTER USER NADI HA GIN CHATGPT KO ANG CHECK IF USER EXIST KAY NATAMAD NAK O GINAGO
 router.post("/", async (req, res) => {
