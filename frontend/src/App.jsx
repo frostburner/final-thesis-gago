@@ -3,12 +3,12 @@ import React, { useState, useEffect } from "react";
 import { Router, Route, Routes } from "react-router-dom";
 import axios from "axios";
 
-import Login from './Pages/Login'
-import Signup from './Pages/Signup'
+import Login from "./Pages/Login";
+import Signup from "./Pages/Signup";
 import Store from "./Pages/Store/Store";
-import StoreCheckout from './Pages/Store/StoreCheckout'
-import StoreCheckoutList from './Pages/Store/StoreCheckoutList'
-import StoreDetails from './Pages/Store/StoreDetails'
+import StoreCheckout from "./Pages/Store/StoreCheckout";
+import StoreCheckoutList from "./Pages/Store/StoreCheckoutList";
+import StoreDetails from "./Pages/Store/StoreDetails";
 import ProductsList from "./Pages/Store/ProductsList";
 import ProductsAdd from "./Pages/Store/ProductsAdd";
 import ProductsByUser from "./Pages/Store/ProductByUser";
@@ -21,14 +21,14 @@ import EventByUser from "./Pages/Event/EventByUser";
 import EventUpdates from "./Pages/Event/EventUpdates";
 import Homepage from "./Components/Homepage";
 import PostDetails from "./Pages/Post/PostDetails";
-import AdminDashboard from "./Pages/Admin/adminDashboard";
-import DisplayUser from "./Pages/Admin/DisplayUser";
-
 
 import Chat from "./Pages/Chat/Chat";
 import AddGroup from "./Pages/Chat/AddGroup";
 import AllGroup from "./Pages/Chat/AllGroup";
 
+import AdminDashboard from "./Pages/Admin/adminDashboard";
+import DisplayUser from "./Pages/Admin/DisplayUser";
+import CreateUser from "./Pages/Admin/CreateUser.jsx";
 
 function App() {
   const [authState, setAuthState] = useState({
@@ -81,51 +81,53 @@ function App() {
   }, []);
   return (
     <>
-    <AuthContext.Provider value={{authState, setAuthState}}>
-      <Routes>
-        <Route path="/" exact element={<Login />} />
-        <Route path="/home" exact element={<Homepage />} />
-        <Route path="/signup" exact element={<Signup />} />
+      <AuthContext.Provider value={{ authState, setAuthState }}>
+        <Routes>
+          <Route path="/" exact element={<Login />} />
+          <Route path="/home" exact element={<Homepage />} />
+          <Route path="/signup" exact element={<Signup />} />
 
-        {/* STORE */}
-        <Route path="/store" exact element={<Store />} />
-        <Route path="/storecheckout/:id" exact element={<StoreCheckout />} />
-        <Route path="/storecheckoutlist/:id" exact element={<StoreCheckoutList />} />
-        <Route path="/storedetails/:id" exact element={<StoreDetails />} />
-        
+          {/* STORE */}
+          <Route path="/store" exact element={<Store />} />
+          <Route path="/storecheckout/:id" exact element={<StoreCheckout />} />
+          <Route
+            path="/storecheckoutlist/:id"
+            exact
+            element={<StoreCheckoutList />}
+          />
+          <Route path="/storedetails/:id" exact element={<StoreDetails />} />
 
-        {/* STORE PRODUCTS ADD, UPDATE, DISPLAYBY USERID */}
-         <Route path="/productslist" exact element={<ProductsList />} />
-         <Route path="/productadd" exact element={<ProductsAdd />} />
-         <Route path="/productbyuser" exact element={<ProductsByUser />} />
-         <Route path="/productupdate/:id" exact element={<ProductsUpdate />} />
+          {/* STORE PRODUCTS ADD, UPDATE, DISPLAYBY USERID */}
+          <Route path="/productslist" exact element={<ProductsList />} />
+          <Route path="/productadd" exact element={<ProductsAdd />} />
+          <Route path="/productbyuser" exact element={<ProductsByUser />} />
+          <Route path="/productupdate/:id" exact element={<ProductsUpdate />} />
 
-         {/* EVENT ADD, UPDATE, DISPLAY BY USERID */}
-         <Route path="/eventslist" exact element={<EventsList />} />
-         <Route path="/eventadd" exact element={<EventsAdd />} />
-         <Route path="/eventdetails/:id" exact element={<EventDetails />} />
+          {/* EVENT ADD, UPDATE, DISPLAY BY USERID */}
+          <Route path="/eventslist" exact element={<EventsList />} />
+          <Route path="/eventadd" exact element={<EventsAdd />} />
+          <Route path="/eventdetails/:id" exact element={<EventDetails />} />
 
-         <Route path="/eventcheckout/:id" exact element={<EventCheckout />} />
-         <Route path="/eventbyuser" exact element={<EventByUser />} />
-         <Route path="/eventupdate/:id" exact element={<EventUpdates />} />
+          <Route path="/eventcheckout/:id" exact element={<EventCheckout />} />
+          <Route path="/eventbyuser" exact element={<EventByUser />} />
+          <Route path="/eventupdate/:id" exact element={<EventUpdates />} />
 
-         {/* POST ADD, UPDATE, DISPLAY BY USERID */}
-         <Route path="/postdetails/:PostId" exact element={<PostDetails />} />
+          {/* POST ADD, UPDATE, DISPLAY BY USERID */}
+          <Route path="/postdetails/:PostId" exact element={<PostDetails />} />
 
-         {/*CHAT*/}
+          {/*CHAT*/}
           <Route path="/chat/:id" exact element={<Chat />} />
           <Route path="/addgroup" exact element={<AddGroup />} />
           <Route path="/allgroup" exact element={<AllGroup />} />
 
-
-         {/* ADMIN */}
-         <Route path="/adminDashboard" exact element={<AdminDashboard />} />
-         <Route path="/displayUser" exact element={<DisplayUser />} />
-        
-      </Routes>
-    </AuthContext.Provider>
+          {/* ADMIN */}
+          <Route path="/adminDashboard" exact element={<AdminDashboard />} />
+          <Route path="/displayUser" exact element={<DisplayUser />} />
+          <Route path="/createUser" exact element={<CreateUser />} />
+        </Routes>
+      </AuthContext.Provider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

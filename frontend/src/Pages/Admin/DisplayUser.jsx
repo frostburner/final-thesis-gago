@@ -33,7 +33,9 @@ function DisplayUser() {
       <Sidebar />
       <div className="p-3 col-9">
         <div className="d-flex justify-content-end">
-          <button className="mb-3">New User</button>
+          <button className="mb-3" onClick={() => navigate("/createUser")}>
+            Create New User
+          </button>
         </div>
         <div>
           <table>

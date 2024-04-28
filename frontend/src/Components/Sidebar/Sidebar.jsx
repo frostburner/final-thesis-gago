@@ -10,8 +10,8 @@ function Sidebar() {
     navigate("/");
   };
   return (
-    <div className="p-3 col-3 bg-secondary">
-      Admin Panel
+    <div className="p-3 col-3">
+      <h4 className="fw-bold">Admin Panel</h4>
       <div className="mt-3">
         <div className="sidebar">
           <ul>

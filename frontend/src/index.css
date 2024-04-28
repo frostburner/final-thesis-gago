@@ -79,10 +79,14 @@ button:focus-visible {
 }
 .sidebar-item {
   list-style: none;
-  background-color: pink;
+  /* background-color: gray; */
   padding: 1rem;
   margin-bottom: 10px;
   cursor: pointer;
+}
+.sidebar-item:hover {
+  background-color: gray;
+  color: white;
 }
 
 table {
@@ -93,9 +97,6 @@ table {
 th, td {
   padding: 8px;
   text-align: left;
-  border: 1px solid #ddd;
-}
-td {
   border: 1px solid #ddd;
 }
 
