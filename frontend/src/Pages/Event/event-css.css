@@ -1,0 +1,10 @@
+/* event css */
+.card-img {
+    height: 300px;
+    object-fit: cover;
+  }
+.display-img {
+  width: 100%;
+  height: inherit;
+  object-fit: fill;
+}

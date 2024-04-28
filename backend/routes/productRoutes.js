@@ -56,7 +56,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// DISPALY SPECIFIC DETAILS OF PRODUCT
+// DISPLAY SPECIFIC DETAILS OF PRODUCT
 router.get("/view/:id", async (req, res) => {
   const id = req.params.id;
   try {
@@ -111,7 +111,7 @@ router.put("/update/:id", async (req, res) => {
       }
       product.name = name;
       product.description = description;
-      product.description = quantity;
+      product.quantity = quantity;
       product.price = price;
 
       await product.save();
