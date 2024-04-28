@@ -8,6 +8,8 @@ const Signup = () => {
     password: "",
     role: "",
   });
+
+  const [alert, setAlert] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -23,6 +25,8 @@ const Signup = () => {
     } catch (error) {
       console.log(error.response);
       console.log(error);
+
+      
     }
   };
 

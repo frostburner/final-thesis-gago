@@ -29,6 +29,12 @@ app.use('/posts', postRouter);
 const commentRouter = require('./routes/commentRoutes');
 app.use('/comments', commentRouter);
 
+const conversationRouter = require('./routes/conversationRoutes');
+app.use('/conversations', conversationRouter);
+
+const messageRouter = require('./routes/messageRoutes');
+app.use('/messages', messageRouter);
+
 
 
 db.sequelize.sync().then(()=>{

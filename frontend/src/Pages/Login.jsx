@@ -6,10 +6,19 @@ import { AuthContext } from "../Helpers/AuthContext";
 const Login = () => {
   const navigate = useNavigate();
   const { authState, setAuthState } = useContext(AuthContext);
+  const [error, setError] = useState('');
+  const [alert, setAlert] = useState(null);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
+
+  const closeAlert = () => {
+    setAlert(null);
+  };
+
+ 
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -20,7 +29,8 @@ const Login = () => {
       );
 
       if (response.data.error) {
-        console.log(response.data.error);
+        console.log(response.data.error)
+        setAlert({ type: 'danger', message: response.data.error });
       } else {
         localStorage.setItem("accessToken", response.data.token);
         setAuthState({
@@ -30,9 +40,19 @@ const Login = () => {
           status: true,
         });
 
+        // if (!username || !password) {
+        //   setAlert({ type: 'danger', message: 'Please fill in all fields.' });
+        //   return;
+        // }
+
         // Log information after successful login
         console.log("Data stored in localStorage:", response.data);
-        navigate("/home");
+        if (response.data.role === 0) {
+          navigate("/adminDashboard");
+        } else {
+          navigate("/home");
+        }
+        
       }
     } catch (error) {
       if (
@@ -40,9 +60,10 @@ const Login = () => {
         error.response.status >= 400 &&
         error.response.status <= 500
       ) {
-        console.log(error.response.data.message);
+        console.log(error.response.data.message)
+        setAlert({ type: 'danger', message: error.response.data.error });
       } else {
-        console.error("An unexpected error occurred:", error);
+        setAlert({ type: 'danger', message: "Error creating user." });
       }
     }
   };
@@ -51,7 +72,14 @@ const Login = () => {
   };
   return (
     <>
+ 
       <form onSubmit={handleSubmit} autoComplete="off">
+      {/* {alert && (
+        <div className={`alert alert-${alert.type} alert-dismissible fade show`} role="alert" >
+            {alert.message}
+            <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={closeAlert}></button>
+        </div>
+    )}  */}
         <div className="d-flex align-items-center flex-column gap-2 justify-content-center vh-100">
           <div className="mb-3">
             <label className="form-label">Username</label>

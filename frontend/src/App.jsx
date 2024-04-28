@@ -21,6 +21,13 @@ import EventByUser from "./Pages/Event/EventByUser";
 import EventUpdates from "./Pages/Event/EventUpdates";
 import Homepage from "./Components/Homepage";
 import PostDetails from "./Pages/Post/PostDetails";
+import AdminDashboard from "./Pages/Admin/adminDashboard";
+import DisplayUser from "./Pages/Admin/DisplayUser";
+
+
+import Chat from "./Pages/Chat/Chat";
+import AddGroup from "./Pages/Chat/AddGroup";
+import AllGroup from "./Pages/Chat/AllGroup";
 
 
 function App() {
@@ -104,6 +111,16 @@ function App() {
 
          {/* POST ADD, UPDATE, DISPLAY BY USERID */}
          <Route path="/postdetails/:PostId" exact element={<PostDetails />} />
+
+         {/*CHAT*/}
+          <Route path="/chat/:id" exact element={<Chat />} />
+          <Route path="/addgroup" exact element={<AddGroup />} />
+          <Route path="/allgroup" exact element={<AllGroup />} />
+
+
+         {/* ADMIN */}
+         <Route path="/adminDashboard" exact element={<AdminDashboard />} />
+         <Route path="/displayUser" exact element={<DisplayUser />} />
         
       </Routes>
     </AuthContext.Provider>

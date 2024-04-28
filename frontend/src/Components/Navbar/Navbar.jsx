@@ -35,6 +35,9 @@ const Navbar = () => {
               <li className="nav-item" onClick={() => navigate("/eventslist")}>
                 Events
               </li>
+              <li className="nav-item" onClick={() => navigate("/allgroup")}>
+                Chats
+              </li>
               <li className="nav-item" onClick={() => navigate("/store")}>
                 Store
               </li>
