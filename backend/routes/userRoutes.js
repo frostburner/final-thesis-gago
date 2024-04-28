@@ -6,6 +6,12 @@ const bcrypt = require("bcrypt");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 const { sign } = require("jsonwebtoken");
 
+// get all users
+router.get("/", async (req, res) => {
+  const listofUsers = await Users.findAll();
+  res.json(listofUsers);
+});
+
 // LOGIN VALIDATE IF USER EXISTS
 router.post("/login", async (req, res) => {
   try {
