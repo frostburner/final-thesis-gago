@@ -6,6 +6,7 @@ import axios from "axios";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import Store from "./Pages/Store/Store";
+import Profile from "./Pages/Profile/profile.jsx";
 import StoreCheckout from "./Pages/Store/StoreCheckout";
 import StoreCheckoutList from "./Pages/Store/StoreCheckoutList";
 import StoreDetails from "./Pages/Store/StoreDetails";
@@ -87,6 +88,7 @@ function App() {
           <Route path="/" exact element={<Login />} />
           <Route path="/home" exact element={<Homepage />} />
           <Route path="/signup" exact element={<Signup />} />
+          <Route path="/profile" exact element={<Profile />} />
 
           {/* STORE */}
           <Route path="/store" exact element={<Store />} />

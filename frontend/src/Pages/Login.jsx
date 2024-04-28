@@ -40,11 +40,6 @@ const Login = () => {
           status: true,
         });
 
-        // if (!username || !password) {
-        //   setAlert({ type: 'danger', message: 'Please fill in all fields.' });
-        //   return;
-        // }
-
         // Log information after successful login
         console.log("Data stored in localStorage:", response.data);
         if (response.data.role === 0) {
@@ -74,12 +69,6 @@ const Login = () => {
     <>
  
       <form onSubmit={handleSubmit} autoComplete="off">
-      {/* {alert && (
-        <div className={`alert alert-${alert.type} alert-dismissible fade show`} role="alert" >
-            {alert.message}
-            <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={closeAlert}></button>
-        </div>
-    )}  */}
         <div className="d-flex align-items-center flex-column gap-2 justify-content-center vh-100">
           <div className="mb-3">
             <label className="form-label">Username</label>
