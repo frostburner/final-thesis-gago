@@ -4,6 +4,12 @@
   padding: 0;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -26,9 +32,9 @@ a:hover {
   color: #535bf2;
 }
 
-body {
+/* body {
 background-color: #f7f7f7;
-}
+} */
 
 h1 {
   font-size: 3.2em;
@@ -68,6 +74,19 @@ button:focus-visible {
   }
 }
 
+.login-bg {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(255, 255, 255, 0)), url(assets/login-bg.jpg);
+  background-size: cover;
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+.login-container {
+  background-color: #fff;
+}
 .column {
   display: flex;
   flex-direction: column;
