@@ -69,7 +69,7 @@ const Signup = () => {
       <div className="col-6 left px-3">
         <form onSubmit={handleSubmit} autoComplete="off" className="p-5">
           <div className="d-flex gap-2 flex-direction-row mb-1">
-            <div className="form-group col-6">
+            <div className="form-group col">
               <label className="form-label">First Name</label>
               <input
                 type="text"
@@ -79,7 +79,7 @@ const Signup = () => {
                 onChange={handleChange}
               />
             </div>
-            <div className="form-group col-6">
+            <div className="form-group col">
               <label className="form-label">Last Name</label>
               <input
                 type="text"
@@ -91,7 +91,7 @@ const Signup = () => {
             </div>
           </div>
           <div className="d-flex gap-2 flex-direction-row mb-1">
-            <div className="form-group col-5">
+            <div className="form-group col">
               <label className="form-label">Birthday</label>
               <input
                 type="date"
@@ -101,7 +101,7 @@ const Signup = () => {
                 onChange={handleChange}
               />
             </div>
-            <div className="form-group col-7">
+            <div className="form-group col">
               <label className="form-label">Email</label>
               <input
                 type="email"
@@ -112,7 +112,7 @@ const Signup = () => {
               />
             </div>
           </div>
-          <div className="form-group mb-1">
+          <div className="form-group col-12 mb-1">
             <label className="form-label">Address</label>
             <input
               type="text"
