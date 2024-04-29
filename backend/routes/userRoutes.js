@@ -107,7 +107,7 @@ router.post("/login", async (req, res) => {
 //POST OR REGISTER USER NADI HA GIN CHATGPT KO ANG CHECK IF USER EXIST KAY NATAMAD NAK O GINAGO
 router.post("/", async (req, res) => {
   try {
-    const { username, password, role } = req.body;
+    const { firstName, lastName, birthday, email, address, username, password, role } = req.body;
     const existingUser = await Users.findOne({ where: { username: username } });
     if (existingUser) {
       return res.status(409).json({ message: "Username already exists!" });
@@ -115,6 +115,11 @@ router.post("/", async (req, res) => {
 
     bcrypt.hash(password, 10).then((hash) => {
       Users.create({
+        firstName: firstName,
+        lastName: lastName,
+        birthday: birthday,
+        email: email,
+        address: address,
         username: username,
         password: hash,
         role: role,

@@ -1,5 +1,29 @@
 module.exports = (sequelize, DataTypes) =>{
     const Users = sequelize.define("Users", {
+        firstName:{
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        lastName:{
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        birthday:{
+            type: DataTypes.DATE, // Assuming you only want the date
+            allowNull: true
+        },
+        email:{
+            type: DataTypes.STRING,
+            allowNull: true,
+            unique: true, // Ensures email is unique
+            validate: {
+                isEmail: true // Validates email format
+            }
+        },
+        address:{
+            type: DataTypes.STRING,
+            allowNull: true
+        },
         username:{
             type: DataTypes.STRING,
             allowNull: false
@@ -24,5 +48,5 @@ module.exports = (sequelize, DataTypes) =>{
         Users.belongsTo(models.Posts, { foreignKey: 'id', as: 'postuser' });
     };
     
-    return Users
-}
+    return Users;
+};
