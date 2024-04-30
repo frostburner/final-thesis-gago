@@ -13,7 +13,7 @@ const Signup = () => {
     address: "",
     email: "",
     role: "",
-    image: null,
+    
   });
 
   const navigate = useNavigate();
@@ -21,19 +21,13 @@ const Signup = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const formDataWithImage = new FormData();
-    for (const key in formData) {
-      formDataWithImage.append(key, formData[key]);
-    }
-    formDataWithImage.append("profilepic", formData.profilepic);
-
     try {
       const response = await axios.post(
         "http://localhost:8080/users/",
-        formDataWithImage,
+        formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
           },
         }
       );
@@ -49,13 +43,6 @@ const Signup = () => {
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
-  };
-
-  const handleImageChange = (event) => {
-    setFormData({
-      ...formData,
-      image: event.target.files[0],
-    });
   };
 
   const accountOptions = [

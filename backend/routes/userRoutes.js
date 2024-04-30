@@ -113,22 +113,23 @@ router.post("/", async (req, res) => {
       return res.status(409).json({ message: "Username already exists!" });
     }
 
-    bcrypt.hash(password, 10).then((hash) => {
-      Users.create({
-        firstName: firstName,
-        lastName: lastName,
-        birthday: birthday,
-        email: email,
-        address: address,
-        username: username,
-        password: hash,
-        role: role,
-      });
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-      res.json("success");
+    const newUser = await Users.create({
+      firstName: firstName,
+      lastName: lastName,
+      username: username,
+      password: hashedPassword,
+      birthday: birthday,
+      email: email,
+      address: address,
+      role: role,
     });
+
+    res.status(201).json({ message: "User created successfully", user: newUser });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("Error creating user:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
