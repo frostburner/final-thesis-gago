@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from '../../Components/Navbar/Navbar';
 import { AuthContext } from '../../Helpers/AuthContext';
+import './chat.css';
 
 const Chat = () => {
   const { id } = useParams();
@@ -45,19 +46,31 @@ const Chat = () => {
   return (
     <>
       <Navbar />
+      <div className="chatBody">
       <div className="chat-container">
         {conversation.messages.map((chat) => (
           <div className="chats" key={chat.id}>
             <h2>{chat.content}</h2>
-            <h2>{chat.username}</h2>
+            <p>{chat.username}</p>
+            <hr />
           </div>
         ))}
       </div>
+    
       <div className="message-input-form">
-        <textarea placeholder="Type your message..."
+        <textarea className="chat-area" placeholder="Type your message..."
           value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}></textarea>
+          onChange={(e) => setNewMessage(e.target.value)}
+          onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleSendMessage();
+            }}}>
+
+            
+          </textarea>
+
         <button onClick={handleSendMessage}>Send</button>
+      </div>
       </div>
     </>
   );

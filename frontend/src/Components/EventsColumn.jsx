@@ -56,6 +56,8 @@ function EventsColumn() {
                       >
                         View Details
                       </button>
+                      <button onClick={(()=> navigate(`/eventdetails/${event.id}`))} className="mt-3 button">View Details</button>
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -55,6 +55,10 @@ const Signup = () => {
     <div className="d-flex signup-container">
       <div className="col-6 left px-3">
         <form onSubmit={handleSubmit} autoComplete="off" className="p-5">
+        <h2 className="fw-bold mb-4" style={{ display: 'flex', alignItems: 'center', width: '35%', justifyContent: 'space-between' }}>
+          <img src="../../src/assets/logo-small.png" alt="" style={{ width: '50px', height: '50px', marginRight: '10px' }} />
+        AudioHive
+      </h2>
           <div className="d-flex gap-2 flex-direction-row mb-1">
             <div className="form-group col">
               <label className="form-label">First Name</label>
@@ -64,6 +68,7 @@ const Signup = () => {
                 className="form-control"
                 value={formData.firstName}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="form-group col">
@@ -74,6 +79,7 @@ const Signup = () => {
                 className="form-control"
                 value={formData.lastName}
                 onChange={handleChange}
+                required
               />
             </div>
           </div>
@@ -86,6 +92,7 @@ const Signup = () => {
                 className="form-control"
                 value={formData.birthday}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="form-group col">
@@ -96,6 +103,7 @@ const Signup = () => {
                 className="form-control"
                 value={formData.email}
                 onChange={handleChange}
+                required
               />
             </div>
           </div>
@@ -107,6 +115,7 @@ const Signup = () => {
               className="form-control"
               value={formData.address}
               onChange={handleChange}
+              required
             />
           </div>
           <div className="form-group mb-1">
@@ -117,6 +126,7 @@ const Signup = () => {
               className="form-control"
               value={formData.username}
               onChange={handleChange}
+              required
             />
           </div>
           <div className="form-group mb-1">
@@ -127,6 +137,7 @@ const Signup = () => {
               className="form-control"
               value={formData.password}
               onChange={handleChange}
+              required
             />
           </div>
           <div className="form-group mb-3">
@@ -162,7 +173,7 @@ const Signup = () => {
           </div>
 
           <div className="button-container mb-3">
-            <button type="submit" className="w-100 btn-primary">
+            <button type="submit" className="w-100 button">
               Submit
             </button>
           </div>
