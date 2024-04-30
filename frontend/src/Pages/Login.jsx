@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../Helpers/AuthContext";
+import "./login.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -87,7 +88,11 @@ const Login = () => {
               </div>
             )}
             <div className="mb-3">
-              <h2 className="fw-bold mb-0">AudioHive</h2>
+              
+              <h2 className="fw-bold mb-0 logo-text">
+                <img src="../../src/assets/logo-small.png" alt="" className="logo"/>
+                AudioHive
+                </h2>
               <span>Login to continue</span>
               <hr></hr>
             </div>

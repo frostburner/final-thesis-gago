@@ -55,6 +55,10 @@ const Signup = () => {
     <div className="d-flex signup-container">
       <div className="col-6 left px-3">
         <form onSubmit={handleSubmit} autoComplete="off" className="p-5">
+        <h2 className="fw-bold mb-4" style={{ display: 'flex', alignItems: 'center', width: '35%', justifyContent: 'space-between' }}>
+          <img src="../../src/assets/logo-small.png" alt="" style={{ width: '50px', height: '50px', marginRight: '10px' }} />
+        AudioHive
+      </h2>
           <div className="d-flex gap-2 flex-direction-row mb-1">
             <div className="form-group col">
               <label className="form-label">First Name</label>
