@@ -52,12 +52,10 @@ function EventsColumn() {
                       </span>
                       <button
                         onClick={() => navigate(`/eventdetails/${event.id}`)}
-                        className="mt-3"
+                        className={event.id % 2 === 0 ? "mt-3" : "mt-3 button"}
                       >
                         View Details
                       </button>
-                      <button onClick={(()=> navigate(`/eventdetails/${event.id}`))} className="mt-3 button">View Details</button>
-                      </div>
                     </div>
                   </div>
                 </div>
