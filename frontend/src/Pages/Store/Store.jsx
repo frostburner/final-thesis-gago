@@ -30,10 +30,10 @@ const Store = () => {
           Sell Merch
         </button>
       </div>
-      <div className="d-flex px-5 gap-2 justify-content-center align-items-center">
+      <div className="d-flex flex-wrap px-5 align-items-center">
         {allProducts.map((product) => (
-          <div className="col-sm-4" key={product.id}>
-            <div className="card mb-3">
+          <div className="col-md-4 mb-3 px-2" key={product.id}>
+            <div className="card">
               <img
                 src={`http://localhost:8080/uploads/${product.image}`}
                 className="card-img-top card-img"
