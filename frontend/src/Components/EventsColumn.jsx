@@ -48,7 +48,7 @@ function EventsColumn () {
                       <span className="card-text">
                         {moment(event.createdAt).format('dddd, MMMM Do YYYY')}
                       </span>
-                      <button onClick={(()=> navigate(`/eventdetails/${event.id}`))} className="mt-3">View Details</button>
+                      <button onClick={(()=> navigate(`/eventdetails/${event.id}`))} className="mt-3 button">View Details</button>
                       </div>
                     </div>
                 </div>
@@ -56,7 +56,7 @@ function EventsColumn () {
             </div>
           ))}
           <div className="px-3 mt-3">
-            <button className="col-12" onClick={(()=> navigate('/eventslist'))}>See More Events</button>
+            <button className="col-12 button" onClick={(()=> navigate('/eventslist'))}>See More Events</button>
           </div>
         </div>
 

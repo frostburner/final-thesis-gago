@@ -52,7 +52,7 @@ function Newsfeed() {
                   value={formData.message}
                   onChange={handleChange}
                 />
-                 <button type="submit" className="col-12">Post</button>
+                 <button type="submit" className="col-12 button">Post</button>
               </form>
             </div>
           </div>

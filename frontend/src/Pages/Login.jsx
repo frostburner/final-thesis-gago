@@ -120,7 +120,7 @@ const Login = () => {
             </div>
             <div className="d-flex flex-column">
               <div className="">
-                <button className="col-12 mb-2" type="submit">
+                <button className="col-12 mb-2 button" type="submit">
                   Login
                 </button>
                 <span>

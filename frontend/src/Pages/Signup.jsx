@@ -68,6 +68,7 @@ const Signup = () => {
                 className="form-control"
                 value={formData.firstName}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="form-group col">
@@ -78,6 +79,7 @@ const Signup = () => {
                 className="form-control"
                 value={formData.lastName}
                 onChange={handleChange}
+                required
               />
             </div>
           </div>
@@ -90,6 +92,7 @@ const Signup = () => {
                 className="form-control"
                 value={formData.birthday}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="form-group col">
@@ -100,6 +103,7 @@ const Signup = () => {
                 className="form-control"
                 value={formData.email}
                 onChange={handleChange}
+                required
               />
             </div>
           </div>
@@ -111,6 +115,7 @@ const Signup = () => {
               className="form-control"
               value={formData.address}
               onChange={handleChange}
+              required
             />
           </div>
           <div className="form-group mb-1">
@@ -121,6 +126,7 @@ const Signup = () => {
               className="form-control"
               value={formData.username}
               onChange={handleChange}
+              required
             />
           </div>
           <div className="form-group mb-1">
@@ -131,6 +137,7 @@ const Signup = () => {
               className="form-control"
               value={formData.password}
               onChange={handleChange}
+              required
             />
           </div>
           <div className="form-group mb-3">
@@ -166,7 +173,7 @@ const Signup = () => {
           </div>
 
           <div className="button-container mb-3">
-            <button type="submit" className="w-100 btn-primary">
+            <button type="submit" className="w-100 button">
               Submit
             </button>
           </div>

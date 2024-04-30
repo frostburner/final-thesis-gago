@@ -24,6 +24,7 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid px-5">
         <Link path to="/home" className="navbar-brand text-white fw-bold">
+      
           AudioHive
         </Link>
         <div>
