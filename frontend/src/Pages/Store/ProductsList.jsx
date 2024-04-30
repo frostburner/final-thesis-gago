@@ -30,36 +30,36 @@ const ProductsList = () => {
   return (
     <>
       <Navbar />
-      <div className="mt-5 mb-3 px-5">
+      <div className="mt-5 mb-3">
         <h4>Product List</h4>
       </div>
-      <div className="row px-5">
+      <div className="row">
         {allProducts.map((product) => (
           <div className="col-sm-4" key={product.id}>
             <div className="card">
-            <img
-              src={`http://localhost:8080/uploads/${product.image}`}
-              className="card-img-top card-img"
-              alt=""
-            />
-            <div className="card-body">
-              <h2 className="card-title">{product.name}</h2>
-              <p className="card-subtitle">{product.user.username}</p>
-              <div className="pt-3 d-flex flex-row gap-2">
-                <button
-                  onClick={() => navigate(`/productupdate/${product.id}`)}
-                  className="bg-primary"
-                >
-                  Update
-                </button>
-                <button
-                  onClick={() => handleDelete(product.id)}
-                  className="bg-danger"
-                >
-                  Delete
-                </button>
+              <img
+                src={`http://localhost:8080/uploads/${product.image}`}
+                className="card-img-top card-img"
+                alt=""
+              />
+              <div className="card-body">
+                <h2 className="card-title">{product.name}</h2>
+                <p className="card-subtitle">{product.user.username}</p>
+                <div className="pt-3 d-flex flex-row gap-2">
+                  <button
+                    onClick={() => navigate(`/productupdate/${product.id}`)}
+                    className="bg-primary"
+                  >
+                    Update
+                  </button>
+                  <button
+                    onClick={() => handleDelete(product.id)}
+                    className="bg-danger"
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
-            </div>
             </div>
           </div>
         ))}
