@@ -7,23 +7,7 @@ module.exports = (sequelize, DataTypes) =>{
         lastName:{
             type: DataTypes.STRING,
             allowNull: false
-        },
-        birthday:{
-            type: DataTypes.DATE, // Assuming you only want the date
-            allowNull: true
-        },
-        email:{
-            type: DataTypes.STRING,
-            allowNull: true,
-            unique: true, // Ensures email is unique
-            validate: {
-                isEmail: true // Validates email format
-            }
-        },
-        address:{
-            type: DataTypes.STRING,
-            allowNull: true
-        },
+        },  
         username:{
             type: DataTypes.STRING,
             allowNull: false
@@ -32,6 +16,26 @@ module.exports = (sequelize, DataTypes) =>{
             type: DataTypes.STRING,
             allowNull: false
         },
+        birthday:{
+            type: DataTypes.DATE, // Assuming you only want the date
+            allowNull: false
+        },
+        
+        address:{
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+      
+        email:{
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true, // Ensures email is unique
+            // validate: {
+            //     isEmail: true // Validates email format
+            // }
+        },
+        
+        
         role:{
             type: DataTypes.INTEGER,
             allowNull: false
