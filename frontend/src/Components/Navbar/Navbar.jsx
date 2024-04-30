@@ -42,7 +42,7 @@ const Navbar = () => {
                 Events
               </li>
               <li className="nav-item" onClick={() => navigate("/allgroup")}>
-                Chats
+                Community
               </li>
               <li className="nav-item" onClick={() => navigate("/store")}>
                 Store
