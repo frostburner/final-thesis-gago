@@ -47,12 +47,13 @@ function EventsColumn() {
                       <h5 className="card-title fw-bold text-primary">
                         {event.title}
                       </h5>
-                      <span className="card-text">
-                        {moment(event.createdAt).format("dddd, MMMM Do YYYY")}
-                      </span>
+                      <p className="card-text mb-3">
+                        {moment(event.eventdate).format("MMMM Do YYYY")}
+                      </p>
                       <button
                         onClick={() => navigate(`/eventdetails/${event.id}`)}
-                        className={event.id % 2 === 0 ? "mt-3" : "mt-3 button"}
+                        className="button"
+                        // className={event.id % 2 === 0 ? "mt-3" : "mt-3 button"}
                       >
                         View Details
                       </button>
