@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
 import "./event-css.css";
+import moment from "moment";
 
 function EventDetails() {
   const [event, setEvent] = useState([]);
@@ -49,9 +50,16 @@ function EventDetails() {
                 <h2 className="card-title">{event.title}</h2>
                 <h2 className="card-title">&#8369;{event.price}</h2>
               </div>
-              <h5 className="card-subtitle">{event.quantity} left</h5>
-              <p className="fst-italic">{event.description}</p>
-              <p className="card-text">{user.username}</p>
+              <h5 className="card-text">
+                {moment(event.eventdate).format("MMMM Do YYYY")}
+              </h5>
+              <span className="card-text">{event.quantity} tickets left</span>
+              <hr />
+              <div className="mt-2">
+                <p className="fst-italic">{event.description}</p>
+                <p className="card-text">{user.username}</p>
+              </div>
+
               <button
                 className="col-12 mt-3"
                 onClick={() => navigate(`/eventcheckout/${event.id}`)}
