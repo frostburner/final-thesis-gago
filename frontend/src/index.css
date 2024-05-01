@@ -81,6 +81,7 @@ button:focus-visible {
 .login-container {
   background-color: #fff;
 }
+
 .column {
   display: flex;
   flex-direction: column;

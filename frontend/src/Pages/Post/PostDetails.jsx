@@ -4,6 +4,7 @@ import { useNavigate, Link, useParams } from "react-router-dom";
 import { AuthContext } from "../../Helpers/AuthContext";
 import Navbar from "../../Components/Navbar/Navbar";
 import moment from "moment";
+import "../../index.css";
 
 function PostDetails() {
   const { PostId } = useParams();
@@ -91,10 +92,15 @@ function PostDetails() {
         </div>
         <div className="col-8 mb-3">
           <div className="card mb-3" key={postObject.id}>
-            <img
+            {/* <img
               src={`http://localhost:8080/uploads/${postObject.media}`}
-              className="card-img-top display-img"
+              className="display-img"
               alt=""
+            /> */}
+            <video
+              width="100%"
+              controls
+              src={`http://localhost:8080/uploads/${postObject.media}`}
             />
             <div className="card-body">
               <p>{postObject.id}</p>
