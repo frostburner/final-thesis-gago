@@ -106,7 +106,7 @@ router.put("/update/:id", upload.single("image"), async (req, res) => {
   try {
     const id = req.params.id;
     const { title, description, quantity, price, eventdate } = req.body;
-    // const image = req.file ? req.file.filename : null;
+    const image = req.file ? req.file.filename : null;
 
     const updatedEvent = await Events.findByPk(id);
     if (!updatedEvent) {
@@ -116,13 +116,13 @@ router.put("/update/:id", upload.single("image"), async (req, res) => {
     // Update the fields
     updatedEvent.title = title;
     updatedEvent.description = description;
-    // updatedEvent.image = image;
+    updatedEvent.image = image;
     updatedEvent.quantity = quantity;
     updatedEvent.price = price;
     updatedEvent.eventdate = eventdate;
-    // if (image) {
-    //   updatedEvent.image = image;
-    // }
+    if (image) {
+      updatedEvent.image = image;
+    }
 
     await updatedEvent.save();
 

@@ -51,11 +51,17 @@ function EventsAdd() {
       );
       console.log(response.data);
       setAlert({ type: "success", message: "Event created successfully!" });
-      // setTimeout(() => {
-      //   navigate("/eventslist");
-      // }, 1500);
+      setTimeout(() => {
+        navigate("/eventslist");
+      }, 1500);
     } catch (error) {
-      console.log(error);
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setAlert({ type: "danger", message: "Error creating event." });
+      }
     }
   };
 
