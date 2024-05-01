@@ -89,38 +89,48 @@ const Login = () => {
             )}
             <div className="mb-3">
               
-              <h2 className="fw-bold mb-0 logo-text">
-                <img src="../../src/assets/logo-small.png" alt="" className="logo"/>
+              <h2 className="fw-semi-bold mb-0 logo-text">
+                <img src="../../src/assets/logo-small.webp" alt="" className="logo"/>
                 AudioHive
                 </h2>
               <span>Login to continue</span>
               <hr></hr>
             </div>
             <div className="d-flex gap-2 flex-row mb-3">
-              <div className="flex-grow-1">
-                <label className="form-label">Username</label>
+             
+            <div className="form-floating flex-grow-1">
                 <input
                   type="text"
                   name="username"
+                  id="floatingInput"
+                  placeholder="Username"
                   className="form-control"
                   value={formData.username}
                   onChange={handleChange}
                 />
+                <label for="floatingInput">Username</label>
               </div>
-              <div className="flex-grow-1">
-                <label className="form-label">Password</label>
+
+              <div className="form-floating flex-grow-1">
                 <input
                   type="password"
                   name="password"
+                  id="floatingInput"
+                  placeholder="Password"
                   className="form-control"
                   value={formData.password}
                   onChange={handleChange}
                 />
+                <label for="floatingInput">Password</label>
               </div>
+             
+              
+            
+             
             </div>
             <div className="d-flex flex-column">
               <div className="">
-                <button className="col-12 mb-2 button" type="submit">
+                <button className="col-3 mb-2 button" type="submit">
                   Login
                 </button>
                 <span>

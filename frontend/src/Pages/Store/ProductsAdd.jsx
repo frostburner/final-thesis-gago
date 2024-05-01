@@ -25,6 +25,16 @@ const ProductsAdd = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    const emptyFields = Object.values(formData).some((field) => !field);
+    if (emptyFields) {
+      setAlert({
+        type: "danger",
+        message: "Please fill in all required fields.",
+      });
+      return;
+    }
+
+
     const newFormData = new FormData();
     newFormData.append("name", formData.name);
     newFormData.append("description", formData.description);
