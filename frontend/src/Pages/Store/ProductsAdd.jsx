@@ -34,7 +34,6 @@ const ProductsAdd = () => {
       return;
     }
 
-
     const newFormData = new FormData();
     newFormData.append("name", formData.name);
     newFormData.append("description", formData.description);
@@ -71,7 +70,7 @@ const ProductsAdd = () => {
       <Navbar />
       <div className="px-5 mt-5">
         <div className="mb-3">
-          <Link path to="/store">
+          <Link path to="/productbyuser">
             <span>Back</span>
           </Link>
         </div>
