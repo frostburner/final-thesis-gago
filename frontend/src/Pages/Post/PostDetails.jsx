@@ -96,12 +96,22 @@ function PostDetails() {
               src={`http://localhost:8080/uploads/${postObject.media}`}
               className="display-img"
               alt=""
-            /> */}
+            />
             <video
               width="100%"
               controls
               src={`http://localhost:8080/uploads/${postObject.media}`}
-            />
+            /> */}
+                        {postObject.media?.endsWith(".mp4") && (
+              <video width="100%" controls src={`http://localhost:8080/uploads/${postObject.media}`} />
+            )}
+            {postObject.media && !postObject.media.endsWith(".mp4") && (
+              <img
+                src={`http://localhost:8080/uploads/${postObject.media}`}
+                className="display-img"
+                alt=""
+              />
+            )}
             <div className="card-body">
               <p>{postObject.id}</p>
               <h2 className="card-title">{postObject.message}</h2>
