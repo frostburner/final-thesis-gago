@@ -43,7 +43,6 @@ const ProductsAdd = () => {
       setTimeout(() => {
         navigate("/store");
       }, 1500);
-      // navigate(0);
     } catch (error) {
       console.log(error);
     }

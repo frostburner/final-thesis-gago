@@ -24,57 +24,57 @@ const upload = multer({ storage });
 
 // POST NEW EVENT
 router.post("/", upload.single("image"), async (req, res) => {
-    try {
-      const { title, description, quantity, price, UserId } = req.body;
-      const image = req.file ? req.file.filename : "";
-  
-      const event = await Events.create({
-        title: title,
-        description: description,
-        UserId: UserId,
-        image: image,
-        quantity: quantity,
-        price: price
-      });
-      res.json(event);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
+  try {
+    const { title, description, quantity, price, eventdate, UserId } = req.body;
+    const image = req.file ? req.file.filename : "";
+
+    const event = await Events.create({
+      title: title,
+      description: description,
+      UserId: UserId,
+      image: image,
+      quantity: quantity,
+      price: price,
+      eventdate: eventdate,
+    });
+    res.json(event);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 // GET ALL THE EVENTS
 router.get("/", async (req, res) => {
-    try {
-      const events = await Events.findAll({
-        include: [{ model: Users, as: "eventuser" }],
-      });
-  
-      res.status(200).json(events);
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({ error: error.message });
-    }
-  });
+  try {
+    const events = await Events.findAll({
+      include: [{ model: Users, as: "eventuser" }],
+    });
 
+    res.status(200).json(events);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.message });
+  }
+});
 
 // GET EVENT BY ID
 router.get("/byId/:id", async (req, res) => {
-    const id = req.params.id;
-    try {
-        const event = await Events.findByPk(id, {
-          include: [{ model: Users, as: "eventuser" }],
-        });
-    
-        if (!event) {
-          return res.status(404).json({ error: "Event not found" });
-        }
-    
-        res.status(200).json(event);
-      } catch (error) {
-        console.log(error);
-        res.status(500).json({ error: error.message });
-      }
-    })
+  const id = req.params.id;
+  try {
+    const event = await Events.findByPk(id, {
+      include: [{ model: Users, as: "eventuser" }],
+    });
+
+    if (!event) {
+      return res.status(404).json({ error: "Event not found" });
+    }
+
+    res.status(200).json(event);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.message });
+  }
+});
 
 // DISPLAY ANG IYA NGA EVENTS KUNG SINO NAKA LOGIN
 router.get("/viewBy/:id", async (req, res) => {
@@ -89,7 +89,9 @@ router.get("/viewBy/:id", async (req, res) => {
     });
 
     if (!events || events.length === 0) {
-      return res.status(404).json({ error: "No events found for the specified user" });
+      return res
+        .status(404)
+        .json({ error: "No events found for the specified user" });
     }
 
     res.status(200).json(events);
@@ -101,50 +103,51 @@ router.get("/viewBy/:id", async (req, res) => {
 
 // UPDATE EVENT
 router.put("/update/:id", upload.single("image"), async (req, res) => {
-    try {
-      const id = req.params.id;
-      const { title, description, quantity, price } = req.body;
-      // const image = req.file ? req.file.filename : null;
-  
-      const updatedEvent = await Events.findByPk(id);
-      if (!updatedEvent) {
-        return res.status(404).json({ error: "Event not found" });
-      }
-  
-      // Update the fields
-      updatedEvent.title = title;
-      updatedEvent.description = description;
-      // updatedEvent.image = image;
-      updatedEvent.quantity = quantity;
-      updatedEvent.price = price;
-      // if (image) {
-      //   updatedEvent.image = image;
-      // }
-  
-      await updatedEvent.save();
-  
-      res.json(updatedEvent);
-    } catch (error) {
-      console.error("Error updating event:", error);
-      res.status(500).json({ error: "Error updating the event" });
+  try {
+    const id = req.params.id;
+    const { title, description, quantity, price, eventdate } = req.body;
+    // const image = req.file ? req.file.filename : null;
+
+    const updatedEvent = await Events.findByPk(id);
+    if (!updatedEvent) {
+      return res.status(404).json({ error: "Event not found" });
     }
-  });
+
+    // Update the fields
+    updatedEvent.title = title;
+    updatedEvent.description = description;
+    // updatedEvent.image = image;
+    updatedEvent.quantity = quantity;
+    updatedEvent.price = price;
+    updatedEvent.eventdate = eventdate;
+    // if (image) {
+    //   updatedEvent.image = image;
+    // }
+
+    await updatedEvent.save();
+
+    res.json(updatedEvent);
+  } catch (error) {
+    console.error("Error updating event:", error);
+    res.status(500).json({ error: "Error updating the event" });
+  }
+});
 
 // DELETE BY ID
-router.delete('/:id', async(req,res)=>{
-    const id = req.params.id;
-  
-    try{
-        const event = await Events.findByPk(id);
-  
-        if(event){
-            await event.destroy();
-            res.status(204).send();
-        }
-    }catch(error){
-        console.log(error);
-        res.status(500).json({error: error.message});
+router.delete("/:id", async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const event = await Events.findByPk(id);
+
+    if (event) {
+      await event.destroy();
+      res.status(204).send();
     }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.message });
+  }
 });
 
 module.exports = router;

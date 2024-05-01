@@ -7,6 +7,7 @@ import Navbar from "../../Components/Navbar/Navbar";
 
 const StoreCheckout = () => {
   const navigate = useNavigate();
+  const [alert, setAlert] = useState(null);
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   const { authState, setAuthState } = useContext(AuthContext);
@@ -18,6 +19,10 @@ const StoreCheckout = () => {
     email: "",
     orderQuantity: 1,
   });
+
+  const closeAlert = () => {
+    setAlert(null);
+  };
 
   const [quantity, setQuantity] = useState(formData.orderQuantity);
 
@@ -59,7 +64,10 @@ const StoreCheckout = () => {
         ProductId: product.id,
       });
       console.log(response.data);
-      navigate(0);
+      setAlert({ type: "success", message: "Checkout success!" });
+      setTimeout(() => {
+        navigate("/store");
+      }, 1500);
     } catch (error) {
       console.log("Error submitting form:", error);
     }
@@ -143,6 +151,16 @@ const StoreCheckout = () => {
           </div>
           <div className="col-6">
             <div className="mb-3">
+              {alert && (
+                <div className={`alert alert-${alert.type}`} role="alert">
+                  {alert.message}
+                  <button
+                    type="button"
+                    className="btn-close"
+                    onClick={closeAlert}
+                  />
+                </div>
+              )}
               <h4>Form Details</h4>
             </div>
             <form onSubmit={handleSubmit} autoComplete="off">

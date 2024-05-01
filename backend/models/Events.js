@@ -19,7 +19,11 @@ module.exports = (sequelize, DataTypes) =>{
         price:{
             type: DataTypes.INTEGER,
             allowNull: false
-        },  
+        },
+        eventdate: {
+            type: DataTypes.DATE,
+            allowNull: false
+        }
     });
 
     Events.associate = (models) => {
