@@ -4,6 +4,7 @@ import axios from "axios";
 import "../index.css";
 
 const Signup = () => {
+  const [alert, setAlert] = useState(null);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -13,13 +14,25 @@ const Signup = () => {
     address: "",
     email: "",
     role: "",
-    
   });
 
   const navigate = useNavigate();
 
+  const closeAlert = () => {
+    setAlert(null);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    const emptyFields = Object.values(formData).some((field) => !field);
+    if (emptyFields) {
+      setAlert({
+        type: "danger",
+        message: "Please fill in all required fields.",
+      });
+      return;
+    }
 
     try {
       const response = await axios.post(
@@ -31,13 +44,19 @@ const Signup = () => {
           },
         }
       );
-
+      console.log("User created successfully");
+      setAlert({ type: "success", message: "User created successfully!" });
       setTimeout(() => {
         navigate("/");
-      }, 2000);
+      }, 1500);
     } catch (error) {
-      console.error(error.response);
-      console.error(error);
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setAlert({ type: "danger", message: "Error creating user." });
+      }
     }
   };
 
@@ -59,6 +78,16 @@ const Signup = () => {
           <img src="../../src/assets/logo-small.png" alt="" style={{ width: '50px', height: '50px', marginRight: '10px' }} />
         AudioHive
       </h2>
+      {alert && (
+              <div className={`alert alert-${alert.type}`} role="alert">
+                {alert.message}
+                <button
+                  type="button" 
+                  className="btn-close"
+                  onClick={closeAlert}
+                />
+              </div>
+            )}
           <div className="d-flex gap-2 flex-direction-row mb-1">
             <div className="form-group col">
               <label className="form-label">First Name</label>
@@ -68,7 +97,6 @@ const Signup = () => {
                 className="form-control"
                 value={formData.firstName}
                 onChange={handleChange}
-                required
               />
             </div>
             <div className="form-group col">
@@ -79,7 +107,7 @@ const Signup = () => {
                 className="form-control"
                 value={formData.lastName}
                 onChange={handleChange}
-                required
+              
               />
             </div>
           </div>
@@ -92,7 +120,7 @@ const Signup = () => {
                 className="form-control"
                 value={formData.birthday}
                 onChange={handleChange}
-                required
+                
               />
             </div>
             <div className="form-group col">
@@ -103,7 +131,7 @@ const Signup = () => {
                 className="form-control"
                 value={formData.email}
                 onChange={handleChange}
-                required
+                
               />
             </div>
           </div>
@@ -115,7 +143,7 @@ const Signup = () => {
               className="form-control"
               value={formData.address}
               onChange={handleChange}
-              required
+              
             />
           </div>
           <div className="form-group mb-1">
@@ -126,7 +154,7 @@ const Signup = () => {
               className="form-control"
               value={formData.username}
               onChange={handleChange}
-              required
+              
             />
           </div>
           <div className="form-group mb-1">
@@ -137,7 +165,7 @@ const Signup = () => {
               className="form-control"
               value={formData.password}
               onChange={handleChange}
-              required
+              
             />
           </div>
           <div className="form-group mb-3">
