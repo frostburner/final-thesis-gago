@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
 import "./event-css.css";
+import moment from "moment";
 
 function EventsList() {
   const [allEvents, setAllEvents] = useState([]);
@@ -29,10 +30,9 @@ function EventsList() {
     <>
       <Navbar />
       <div className="mt-3 px-5">
-        <div className="">
-          <button className="mb-3" onClick={() => navigate("/eventadd")}>
-            Create Event
-          </button>
+        <div className="mb-3">
+          <h3 className="fw-bold">Upcoming Events</h3>
+          <hr />
         </div>
         <div className="row">
           {allEvents.map((event) => (
@@ -45,6 +45,9 @@ function EventsList() {
                 />
                 <div className="card-body">
                   <h2 className="card-title">{event.title}</h2>
+                  <p className="card-text">
+                    {moment(event.eventdate).format("MMMM Do YYYY")}
+                  </p>
                   <p className="card-text">{event.eventuser.username}</p>
                   <button
                     onClick={() => navigate(`/eventdetails/${event.id}`)}
