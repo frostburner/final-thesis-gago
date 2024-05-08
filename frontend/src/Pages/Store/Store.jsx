@@ -25,12 +25,13 @@ const Store = () => {
   return (
     <>
       <Navbar />
-      <div className="px-5 mt-3">
-        <button className="mb-3" onClick={() => navigate("/productadd")}>
-          Sell Merch
-        </button>
+      <div>
+        <div className="px-5 mt-3">
+          <h3 className="fw-bold">Merch Store</h3>
+          <hr />
+        </div>
       </div>
-      <div className="d-flex flex-wrap px-5 align-items-center">
+      <div className="d-flex flex-wrap px-5 mt-3 align-items-center">
         {allProducts.map((product) => (
           <div className="col-md-4 mb-3 px-2" key={product.id}>
             <div className="card">
