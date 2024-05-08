@@ -34,8 +34,10 @@ module.exports = (sequelize, DataTypes) =>{
             //     isEmail: true // Validates email format
             // }
         },
-        
-        
+        image: {
+            type: DataTypes.STRING,
+            allowNull:true
+        },       
         role:{
             type: DataTypes.INTEGER,
             allowNull: false

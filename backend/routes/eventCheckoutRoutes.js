@@ -9,7 +9,7 @@ router.post("/", async (req, res) => {
     const t = await sequelize.transaction();
     
     try {
-      const { firstName, lastName, street, zipcode, email, refno, total, image, UserId, EventId } = req.body;
+      const { firstName, lastName, street, zipcode, email, refno, total, image, UserId, orderQuantity, EventId } = req.body;
       const event = await Events.findByPk(EventId, { transaction: t });
   
       if (!event) {
@@ -20,7 +20,7 @@ router.post("/", async (req, res) => {
         await t.rollback();
         return res.status(400).json({ error: "Event ticket out of stock" });
       }
-      event.quantity -= 1;
+      event.quantity -= orderQuantity;
       await event.save({ transaction: t });
   
       const checkout = await EventCheckouts.create({

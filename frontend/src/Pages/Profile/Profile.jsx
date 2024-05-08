@@ -20,7 +20,7 @@ function Profile() {
   useEffect(() => {
     axios.get(`http://localhost:8080/users/byId/${id}`).then((response) => {
       setUser(response.data);
-      console.log(listofUsers);
+      // console.log(listofUsers);
     });
   }, []);
 
@@ -44,6 +44,12 @@ function Profile() {
     const year = formattedDate.format("YYYY"); // Get year
     return `${month} ${day} ${year}`; // Combine all with a space
   };
+
+  
+  const handleEditProfile = () => {
+    navigate(`/profile/edit/${id}`);
+  };
+  
   return (
     <>
       <Navbar />
@@ -69,6 +75,8 @@ function Profile() {
           </div>
         </div>
       </div>
+
+      <button className="btn btn-primary" onClick={handleEditProfile}>Edit</button>
     </>
   );
 }

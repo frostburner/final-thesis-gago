@@ -18,7 +18,23 @@ function EventCheckout() {
         street:"",
         zipcode:"",
         email:"",
+        orderQuantity: 1,
     });
+
+    const [quantity, setQuantity] = useState(formData.orderQuantity);
+
+    
+  const handleDecrement = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+      setFormData({ ...formData, orderQuantity: quantity - 1 }); // Update form data
+    }
+  };
+
+  const handleIncrement = () => {
+    setQuantity(quantity + 1);
+    setFormData({ ...formData, orderQuantity: quantity + 1 }); // Update form data
+  };
 
   useEffect(() => {
     axios
@@ -33,14 +49,13 @@ function EventCheckout() {
   }, [id]);
 
     const UserId = authState.id;
-
     const handleSubmit = async (e) => {
       e.preventDefault();
   
       try {
         const response = await axios.post("http://localhost:8080/eventCheckouts/", {
           ...formData,
-          total: events.price,
+          total: events.price * formData.orderQuantity,
           image: events.image,
           refno: alphanumericReference,
           UserId: UserId,
@@ -86,7 +101,7 @@ function EventCheckout() {
         </div>
         <div className="col-6">
           <div className="mb-3">
-            <h4>Form Details</h4>
+            <h4>Event Checkout</h4>
           </div>
           <form onSubmit={handleSubmit} autoComplete="off">
             <div className="form-floating mb-3">
@@ -109,6 +124,43 @@ function EventCheckout() {
               <input type="text" name="email" id="floatingInput" placeholder="Zip Code" className="form-control" value={formData.email} onChange={handleChange} />
               <label for="floatingInput">Email</label>
             </div>
+            <span>{events.quantity} left</span>
+            <div class="col-2">
+                    <div class="input-group mb-3">
+                      <button
+                        class="btn btn-outline-secondary btn-sm minus"
+                        type="button"
+                        onClick={handleDecrement}
+                      >
+                        -
+                      </button>
+                      <input
+                        type="text"
+                        readOnly
+                        name="orderQuantity"
+                        id="orderQuantity"
+                        min="1"
+                        value={quantity}
+                        className="form-control text-center"
+                        onChange={(e) => {
+                          // Update state and formData on change
+                          const newQuantity = parseInt(e.target.value);
+                          setQuantity(newQuantity);
+                          setFormData({
+                            ...formData,
+                            orderQuantity: newQuantity,
+                          });
+                        }}
+                      />
+                      <button
+                        class="btn btn-outline-secondary btn-sm plus"
+                        type="button"
+                        onClick={handleIncrement}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
             <button type="submit">Submit</button>
           </form>
         </div>

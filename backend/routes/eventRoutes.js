@@ -25,7 +25,7 @@ const upload = multer({ storage });
 // POST NEW EVENT
 router.post("/", upload.single("image"), async (req, res) => {
     try {
-      const { title, description, quantity, price, UserId } = req.body;
+      const { title, description, quantity, price, UserId, location } = req.body;
       const image = req.file ? req.file.filename : "";
   
       const event = await Events.create({
@@ -34,7 +34,8 @@ router.post("/", upload.single("image"), async (req, res) => {
         UserId: UserId,
         image: image,
         quantity: quantity,
-        price: price
+        price: price,
+        location: location,
       });
       res.json(event);
     } catch (error) {
@@ -103,7 +104,7 @@ router.get("/viewBy/:id", async (req, res) => {
 router.put("/update/:id", upload.single("image"), async (req, res) => {
     try {
       const id = req.params.id;
-      const { title, description, quantity, price } = req.body;
+      const { title, description, quantity, price, location } = req.body;
       // const image = req.file ? req.file.filename : null;
   
       const updatedEvent = await Events.findByPk(id);
@@ -117,6 +118,7 @@ router.put("/update/:id", upload.single("image"), async (req, res) => {
       // updatedEvent.image = image;
       updatedEvent.quantity = quantity;
       updatedEvent.price = price;
+      updatedEvent.location = location;
       // if (image) {
       //   updatedEvent.image = image;
       // }

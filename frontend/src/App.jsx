@@ -7,6 +7,7 @@ import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import Store from "./Pages/Store/Store";
 import Profile from "./Pages/Profile/Profile";
+import EditProfile from "./Pages/Profile/EditProfile.jsx"
 import StoreCheckout from "./Pages/Store/StoreCheckout";
 import StoreCheckoutList from "./Pages/Store/StoreCheckoutList";
 import StoreDetails from "./Pages/Store/StoreDetails";
@@ -89,6 +90,7 @@ function App() {
           <Route path="/home" exact element={<Homepage />} />
           <Route path="/signup" exact element={<Signup />} />
           <Route path="/profile/:id" exact element={<Profile />} />
+          <Route path="/profile/edit/:id" exact element={<EditProfile/>} />
 
           {/* STORE */}
           <Route path="/store" exact element={<Store />} />

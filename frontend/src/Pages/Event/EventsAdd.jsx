@@ -6,6 +6,7 @@ import axios from 'axios';
 
 function EventsAdd() {
   const navigate = useNavigate();
+  const [alert, setAlert] = useState(null);
   const {authState, setAuthState} = useContext(AuthContext);
   const [formData, setFormData] = useState({
     title:"",
@@ -13,6 +14,7 @@ function EventsAdd() {
     image: null,
     quantity: "",
     price: "",
+    location: "",
   });
 
   const id = authState.id;
@@ -27,11 +29,15 @@ function EventsAdd() {
     newFormData.append("image", formData.image);
     newFormData.append("quantity", formData.quantity);
     newFormData.append("price", formData.price);
+    newFormData.append("location", formData.location);
 
       try {
         const response = await axios.post("http://localhost:8080/events/", newFormData);
         console.log(response.data);
-        navigate(0)
+        setAlert({ type: "success", message: "Event created successfully!" });
+        setTimeout(() => {
+          navigate("/eventslist");
+        }, 1500);
       } catch (error) {
         console.log(error)
     };
@@ -60,9 +66,13 @@ function EventsAdd() {
       <div className="border rounded p-3 mb-3">
         <form onSubmit={handleSubmit} className="p-4" autoComplete="off">
           <div className="mb-3">
-            <label className="form-label">Name</label>
-            <input type="text" name="title" className="form-control" placeholder="Enter Title" value={formData.title} onChange={handleChange}
+            <label className="form-label">Event Name</label>
+            <input type="text" name="title" className="form-control" placeholder="Enter Event Name" value={formData.title} onChange={handleChange}
             />
+          </div>
+          <div className="mb-3">
+            <label>Location</label>
+            <input type="text" name="location" className="form-control" placeholder="Enter Location" value={formData.location} onChange={handleChange}/>
           </div>
           <div className="mb-3">
             <label>Description</label>
