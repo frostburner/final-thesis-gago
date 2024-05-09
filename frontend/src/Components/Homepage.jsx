@@ -6,6 +6,7 @@ import Navbar from "./Navbar/Navbar";
 import moment from "moment";
 import EventsColumn from "./EventsColumn";
 import Newsfeed from "./Newsfeed";
+import ProfilePicture from "../Pages/Profile/ProfilePicture";
 
 function Homepage() {
   const { authState, setAuthState } = useContext(AuthContext);
@@ -14,7 +15,7 @@ function Homepage() {
   const id = authState.id;
 
   useEffect(() => {
-    axios.get("http://localhost:8080/posts").then((response) => {
+    axios.get("http://localhost:8080/posts/").then((response) => {
       setListOfPosts(response.data);
     });
   }, []);
@@ -42,7 +43,10 @@ function Homepage() {
                   }}
                 >
                   <div className="card-body">
-                    <h4 className="card-title">{value.message}</h4>
+                    <div className="d-flex align-items-center mb-2">
+                      <ProfilePicture imageUrl={`http://localhost:8080/uploads/${user.image}`} />
+                      <h4 className="card-title ms-2">{value.message}</h4>
+                    </div>
                     <p className="card-text">@{user.username}</p>
                   </div>
                 </div>

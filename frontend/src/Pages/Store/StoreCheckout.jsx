@@ -17,26 +17,9 @@ const StoreCheckout = () => {
     street: "",
     zipcode: "",
     email: "",
-    orderQuantity: 1,
   });
 
-  const closeAlert = () => {
-    setAlert(null);
-  };
-
-  const [quantity, setQuantity] = useState(formData.orderQuantity);
-
-  const handleDecrement = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-      setFormData({ ...formData, orderQuantity: quantity - 1 }); // Update form data
-    }
-  };
-
-  const handleIncrement = () => {
-    setQuantity(quantity + 1);
-    setFormData({ ...formData, orderQuantity: quantity + 1 }); // Update form data
-  };
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     axios
@@ -50,17 +33,22 @@ const StoreCheckout = () => {
   }, [id]);
 
   const UserId = authState.id;
+
+  const closeAlert = () => {
+    setAlert(null);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
       const response = await axios.post("http://localhost:8080/checkouts/", {
         ...formData,
-        // orderQuantity: quantity,
-        total: product.price * formData.orderQuantity,
+        orderQuantity: quantity,
+        total: product.price * quantity,
         image: product.image,
         refno: alphanumericReference,
-        UserId: UserId,
+        UserId,
         ProductId: product.id,
       });
       console.log(response.data);
@@ -76,6 +64,17 @@ const StoreCheckout = () => {
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
+
+  const handleDecrement = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  const handleIncrement = () => {
+    setQuantity(quantity + 1);
+  };
+
   return (
     <>
       <Navbar />
@@ -101,50 +100,11 @@ const StoreCheckout = () => {
                 )}
               </div>
               <div className="col-12">
-                <div className="d-flex mb-3 align-items-center">
-                  <div className="col-10">
-                    <h2>{product.name}</h2>
-                    <h4>&#8369;{product.price}</h4>
-                    <span>{product.quantity} left</span>
-                  </div>
-                  <div class="col-2">
-                    <div class="input-group mb-3">
-                      <button
-                        class="btn btn-outline-secondary btn-sm minus"
-                        type="button"
-                        onClick={handleDecrement}
-                      >
-                        -
-                      </button>
-                      <input
-                        type="text"
-                        readOnly
-                        name="orderQuantity"
-                        id="orderQuantity"
-                        min="1"
-                        value={quantity}
-                        className="form-control text-center"
-                        onChange={(e) => {
-                          // Update state and formData on change
-                          const newQuantity = parseInt(e.target.value);
-                          setQuantity(newQuantity);
-                          setFormData({
-                            ...formData,
-                            orderQuantity: newQuantity,
-                          });
-                        }}
-                      />
-                      <button
-                        class="btn btn-outline-secondary btn-sm plus"
-                        type="button"
-                        onClick={handleIncrement}
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
+                <div className="mb-3">
+                  <h2>{product.name}</h2>
+                  <h4>&#8369;{product.price}</h4>
+                  <span>{product.quantity} left</span>
                 </div>
-
                 <p className="fst-italic">{product.description}</p>
               </div>
             </div>
@@ -168,63 +128,91 @@ const StoreCheckout = () => {
                 <input
                   type="text"
                   name="firstName"
-                  id="floatingInput"
+                  id="firstName"
                   placeholder="First Name"
                   className="form-control"
                   value={formData.firstName}
                   onChange={handleChange}
                 />
-                <label for="floatingInput">First Name</label>
+                <label htmlFor="firstName">First Name</label>
               </div>
               <div className="form-floating mb-3">
                 <input
                   type="text"
                   name="lastName"
-                  id="floatingInput"
+                  id="lastName"
                   placeholder="Last Name"
                   className="form-control"
                   value={formData.lastName}
                   onChange={handleChange}
                 />
-                <label for="floatingInput">Last Name</label>
+                <label htmlFor="lastName">Last Name</label>
               </div>
               <div className="form-floating mb-3">
                 <input
                   type="text"
                   name="street"
-                  id="floatingInput"
+                  id="street"
                   placeholder="Street"
                   className="form-control"
                   value={formData.street}
                   onChange={handleChange}
                 />
-                <label for="floatingInput">Street</label>
+                <label htmlFor="street">Street</label>
               </div>
               <div className="form-floating mb-3">
                 <input
                   type="text"
                   name="zipcode"
-                  id="floatingInput"
+                  id="zipcode"
                   placeholder="Zip Code"
                   className="form-control"
                   value={formData.zipcode}
                   onChange={handleChange}
                 />
-                <label for="floatingInput">Zip Code</label>
+                <label htmlFor="zipcode">Zip Code</label>
               </div>
               <div className="form-floating mb-3">
                 <input
                   type="text"
                   name="email"
-                  id="floatingInput"
-                  placeholder="Zip Code"
+                  id="email"
+                  placeholder="Email"
                   className="form-control"
                   value={formData.email}
                   onChange={handleChange}
                 />
-                <label for="floatingInput">Email</label>
+                <label htmlFor="email">Email</label>
               </div>
-              <button type="submit">Submit</button>
+              <div className="mb-3">
+                <label htmlFor="quantity" className="me-2">Quantity:</label>
+                <div className="input-group">
+                  <button
+                    className="btn btn-outline-secondary"
+                    type="button"
+                    onClick={handleDecrement}
+                  >
+                    -
+                  </button>
+                  <input
+                    type="text"
+                    readOnly
+                    name="orderQuantity"
+                    id="orderQuantity"
+                    value={quantity}
+                    className="form-control text-center"
+                    style={{ maxWidth: '50px' }} // Adjust the maximum width here
+                  />
+                  <button
+                    className="btn btn-outline-secondary"
+                    type="button"
+                    onClick={handleIncrement}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <button type="submit" className="btn btn-primary">Submit</button>
             </form>
           </div>
         </div>

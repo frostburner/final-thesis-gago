@@ -133,7 +133,7 @@ const Login = () => {
                 <button className="col-3 mb-2 button" type="submit">
                   Login
                 </button>
-                <span>
+                <span class="mx-3">
                   Don't have an account?{" "}
                   <Link className="text-decoration-none" path to="/signup">
                     Sign Up Here

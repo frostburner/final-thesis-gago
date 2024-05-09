@@ -2,6 +2,27 @@ const express = require("express");
 const router = express.Router();
 const { Users } = require("../models");
 
+const multer = require("multer");
+const path = require("path");
+const fs = require("fs");
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    const uploadFolder = path.join(__dirname, "../uploads");
+    if (!fs.existsSync(uploadFolder)) {
+      fs.mkdirSync(uploadFolder);
+    }
+    cb(null, uploadFolder);
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+
+const upload = multer({ storage });
+
+
+
 const bcrypt = require("bcrypt");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 const { sign } = require("jsonwebtoken");
@@ -135,6 +156,62 @@ router.post("/", async (req, res) => {
 
 router.get("/auth", validateToken, (req, res) => {
   res.json(req.user);
+});
+
+//edit na ni nga may profile tangina
+router.put("/edit/:id", upload.single("image"), async (req, res) => {
+  const id = req.params.id;
+  const { firstName, lastName, username, password, birthday, email, address } = req.body;
+  const image = req.file ? req.file.filename : null;
+
+  try {
+    const updatedProfile = await Users.findByPk(id);
+
+    if (!updatedProfile) {
+      return res.status(404).json({error: "User not found."});
+    }
+
+    updatedProfile.firstName = firstName;
+    updatedProfile.lastName = lastName;
+    updatedProfile.username = username;
+    // updatedProfile.password = password;
+    updatedProfile.birthday  = birthday;
+    updatedProfile.email = email;
+    updatedProfile.address = address;
+    if (image) {
+      updatedProfile.image = image;
+    }
+
+    await updatedProfile.save();
+    res.json(updatedProfile);
+  }catch (error) {
+    console.error("Error updating profile", error);
+    res.status(500).json({error: "Internal service error"});
+  }
+
+});
+
+//USER SEARCH POTAKA
+router.get("/search", async (req, res) => {
+  try {
+    const query = req.query.query.toLowerCase();
+    
+    // Search for users, posts, groups, etc. in the database based on the query
+    const userResults = await Users.findAll({
+      where: {
+        [Sequelize.Op.or]: [
+          { username: { [Sequelize.Op.iLike]: `%${query}%` } },
+          { firstName: { [Sequelize.Op.iLike]: `%${query}%` } },
+          { lastName: { [Sequelize.Op.iLike]: `%${query}%` } }
+        ]
+      }
+    });
+
+    res.json(searchResults);
+  } catch (error) {
+    console.error("Error searching users:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 module.exports = router;

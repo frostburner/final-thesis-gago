@@ -40,6 +40,7 @@ function EventsList() {
           </div>
         )}
       <div className="row">
+        <h3>Upcoming Events</h3>
         {allEvents.map((event) => (
           <div className="col-sm-4" key={event.id}>
             <div className="card mb-3">
@@ -53,7 +54,7 @@ function EventsList() {
                 <p className="card-text">
                     {moment(event.eventdate).format("MMMM Do YYYY")}
                   </p>
-                <p className="card-text">{event.eventuser.username}</p>
+                <p className="card-text">{event.eventuser?.username}</p>
                 <button
                   onClick={() => navigate(`/eventdetails/${event.id}`)}
                   className="bg-primary"

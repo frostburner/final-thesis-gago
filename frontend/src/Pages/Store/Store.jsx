@@ -42,7 +42,8 @@ const Store = () => {
               />
               <div className="card-body">
                 <h2 className="card-title">{product.name}</h2>
-                <p className="card-text">{product.user.username}</p>
+                <h4>&#8369;{product.price}</h4>
+                <p className="card-text">Product by: {product.user.username}</p>
                 <button
                   onClick={() => navigate(`/storedetails/${product.id}`)}
                   className="bg-primary"

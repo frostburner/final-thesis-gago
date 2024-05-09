@@ -21,12 +21,13 @@ const AllGroup = () => {
   return (
     <>
       <Navbar />
-      <button className="mt-5 mb-5 add-btn" onClick={(()=> navigate('/addgroup'))}>Create Community Chat</button>
+     
+      <button className="mx-5 my-5 add-btn" onClick={(()=> navigate('/addgroup'))}>Create Community Chat</button>
 
-      <h2 className='mb-5'>All Community chats: </h2>
+      <h2 className='m-5 '>Community Chats: </h2>
       {allGroup.map((group) => {
         return (
-          <div key={group.id} onClick={(()=> navigate(`/chat/${group.id}`))}>
+          <div key={group.id} onClick={(()=> navigate(`/chat/${group.id}`))}style={{ margin: '50px' }}>
             <h1>{group.groupname}</h1>
             <p>by: {group.username}</p>
             <hr></hr>

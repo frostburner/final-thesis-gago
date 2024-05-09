@@ -24,7 +24,7 @@ function Newsfeed() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/posts",
+        "http://localhost:8080/posts/",
         newFormData,
         {
           headers: {
@@ -33,9 +33,9 @@ function Newsfeed() {
         }
       );
       console.log("response", response);
-      // setTimeout(() => {
-      //   navigate(0);
-      // }, 500);
+      setTimeout(() => {
+        navigate(0);
+      }, 500);
     } catch (error) {
       console.log(error.response);
       console.log(error);
@@ -78,7 +78,7 @@ function Newsfeed() {
                     Browse
                   </label> */}
                 </div>
-                <button type="submit" className="col-12">
+                <button type="submit" className="col-12 button">
                   Post
                 </button>
               </form>

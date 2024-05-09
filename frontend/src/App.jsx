@@ -27,11 +27,14 @@ import PostDetails from "./Pages/Post/PostDetails";
 import Chat from "./Pages/Chat/Chat";
 import AddGroup from "./Pages/Chat/AddGroup";
 import AllGroup from "./Pages/Chat/AllGroup";
+import ChatUser from "./Pages/Chat/ChatUser";
+// import ChatUser from './Pages/ChatUser/ChatUser';
 
 import AdminDashboard from "./Pages/Admin/adminDashboard";
 import DisplayUser from "./Pages/Admin/DisplayUser";
 import CreateUser from "./Pages/Admin/CreateUser.jsx";
 import EditUser from "./Pages/Admin/EditUser.jsx";
+import UserList from "./Pages/UserList.jsx";
 
 function App() {
   const [authState, setAuthState] = useState({
@@ -119,11 +122,15 @@ function App() {
 
           {/* POST ADD, UPDATE, DISPLAY BY USERID */}
           <Route path="/postdetails/:PostId" exact element={<PostDetails />} />
+        {/* SEARCH BAR*/}
+        <Route path="/userlist" element={<UserList />} />
 
           {/*CHAT*/}
           <Route path="/chat/:id" exact element={<Chat />} />
           <Route path="/addgroup" exact element={<AddGroup />} />
           <Route path="/allgroup" exact element={<AllGroup />} />
+          {/* <Route path="/chatuser" exact element={<ChatUser/>} /> */}
+          <Route path="/conversations/chat/:id" exact element={<ChatUser /> } />
 
           {/* ADMIN */}
           <Route path="/adminDashboard" exact element={<AdminDashboard />} />

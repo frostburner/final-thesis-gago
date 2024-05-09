@@ -49,4 +49,25 @@ router.get('/chat/:id', async (req, res) => {
     }
 });
 
+
+// GET: Retrieve messages between two users
+router.get('/user/:userId/:otherUserId', async (req, res) => {
+    const { userId, otherUserId } = req.params;
+    try {
+        const messages = await Messages.findAll({
+            where: {
+                [Op.or]: [
+                    { senderId: userId, recipientId: otherUserId },
+                    { senderId: otherUserId, recipientId: userId }
+                ]
+            }
+        });
+        res.json(messages);
+    } catch (error) {
+        console.error('Error fetching messages between users:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+
 module.exports = router;

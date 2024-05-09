@@ -64,7 +64,7 @@ function EventsColumn() {
             </div>
           ))}
           <div className="px-3 mt-3">
-            <button className="col-12" onClick={() => navigate("/eventslist")}>
+            <button className="col-12 button" onClick={() => navigate("/eventslist")}>
               See More Events
             </button>
           </div>

@@ -117,7 +117,7 @@ const ProductsAdd = () => {
                 type="number"
                 name="quantity"
                 className="form-control"
-                placeholder="Enter Quuantity"
+                placeholder="Enter Quantity"
                 value={formData.quantity}
                 onChange={handleChange}
               />

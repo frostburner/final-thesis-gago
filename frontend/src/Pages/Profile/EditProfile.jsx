@@ -20,7 +20,7 @@ const EditProfile = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/profile/edit/${id}`)
+    .get(`http://localhost:8080/users/edit/${id}` )
       .then((response) => {
         setFormData({
           firstName: response.data.firstName,
@@ -79,7 +79,7 @@ const EditProfile = () => {
       formDataToSend.append("email", formData.email);
       formDataToSend.append("image", formData.image);
 
-      await axios.put(`http://localhost:8080/profile/edit/${id}`, formDataToSend);
+      await axios.put(`http://localhost:8080/users/edit/${id}`, formDataToSend);
 
       // Optionally, you can redirect the user to the profile page after successful submission
       navigate(`/profile/${id}`);
@@ -197,7 +197,7 @@ const EditProfile = () => {
                 onChange={handleFileChange}
               />
             </div>
-            <button type="button" className="btn btn-primary ms-2" onClick={handleEditButtonClick}>Edit</button>
+            <button onClick={handleSubmit}>Submit</button>
           </form>
         </div>
       </div>
