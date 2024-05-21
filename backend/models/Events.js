@@ -20,12 +20,20 @@ module.exports = (sequelize, DataTypes) =>{
             type: DataTypes.INTEGER,
             allowNull: false
         },  
+        eventdate: {
+          type: DataTypes.DATE,
+          allowNull: true,
+        },
+        location: {
+          type: DataTypes.STRING,
+          allowNull:false
+        }
     });
 
-    Events.associate = (models) => {
-        Events.belongsTo(models.Users, { foreignKey: 'UserId', as: 'eventuser' });
-        Events.belongsTo(models.EventCheckouts, { foreignKey: 'id', as: 'event' });
-    };
+  Events.associate = (models) => {
+    Events.belongsTo(models.Users, { foreignKey: "UserId", as: "eventuser" });
+    Events.belongsTo(models.EventCheckouts, { foreignKey: "id", as: "event" });
+  };
 
-    return Events
-}
+  return Events;
+};

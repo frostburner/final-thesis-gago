@@ -1,27 +1,106 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import "../../index.css";
-import { Link, useNavigate} from 'react-router-dom';
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import Sidebar from "../../Components/Sidebar/Sidebar.jsx";
 
 function DisplayUser() {
+  const navigate = useNavigate();
+  const [listofUsers, setListofUsers] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/users").then((response) => {
+      setListofUsers(response.data);
+      console.log(listofUsers);
+    });
+  }, []);
+
+  const getRoleText = (role) => {
+    switch (role) {
+      case 0:
+        return "Admin";
+      case 1:
+        return "Artist";
+      case 2:
+        return "Event Organizer";
+      default:
+        return "";
+    }
+  };
+
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this user?"
+    );
+    if (confirmDelete) {
+      try {
+        await axios.delete(`http://localhost:8080/users/delete/${id}`);
+        setListofUsers((prevUsers) =>
+          prevUsers.filter((user) => user.id !== id)
+        );
+        setAlert({ type: "success", message: "User deleted successfully!" });
+        console.log("deleted");
+      } catch (error) {
+        if (
+          error.response &&
+          error.response.status >= 400 &&
+          error.response.status <= 500
+        ) {
+          setAlert({ type: "danger", message: "Error deleting user." });
+        }
+      }
+    }
+  };
+
   return (
     <div className="d-flex w-100">
-      <div className="p-3 col-3 bg-secondary">
-        Dashboard
-        <div className="mt-3">
-          <div className="sidebar">
-            <ul>
-              <li className="nav-item" onClick={() => navigate("/displayUser")}>Users</li>
-              <li className="nav-item">Events</li>
-              <li className="nav-item">Products</li>
-            </ul>
-          </div>
-          <button onClick={logout} className="mt-3 w-100 bg-danger">Logout</button>
+      <Sidebar />
+      <div className="p-3 col-9">
+        <div className="d-flex justify-content-end">
+          <button className="mb-3" onClick={() => navigate("/createUser")}>
+            Create New User
+          </button>
         </div>
-
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th className="col-2">ID</th>
+                <th className="col-4">Username</th>
+                <th className="col-4">Role</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {listofUsers.map((user) => (
+                <tr key={user.id}>
+                  <td>{user.id}</td>
+                  <td>{user.username}</td>
+                  <td>{getRoleText(user.role)}</td>
+                  <td className="d-flex gap-2">
+                    <button
+                      className="mb-3 bg-success"
+                      onClick={() => {
+                        navigate(`/editUser/${user.id}`);
+                      }}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="mb-3 bg-danger"
+                      onClick={() => handleDelete(user.id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div className="p-3 col-9 bg-success">Something</div>
     </div>
-  )
+  );
 }
 
 export default DisplayUser;

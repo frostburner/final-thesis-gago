@@ -1,0 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.profile-photo {
+  height: 300px;
+}
+
+.name-title, .name-description {
+  display: flex;
+  flex-direction: column;
+}

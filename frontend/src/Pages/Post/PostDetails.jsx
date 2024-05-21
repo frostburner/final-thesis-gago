@@ -4,6 +4,8 @@ import { useNavigate, Link, useParams } from "react-router-dom";
 import { AuthContext } from "../../Helpers/AuthContext";
 import Navbar from "../../Components/Navbar/Navbar";
 import moment from "moment";
+import ProfilePicture from "../Profile/ProfilePicture";
+import "../../index.css";
 
 function PostDetails() {
   const { PostId } = useParams();
@@ -83,19 +85,19 @@ function PostDetails() {
   return (
     <>
       <Navbar />
-      <div className="px-5 mt-5">
-        <div className="mb-3">
-          <Link path to="/home">
-            <span>Back</span>
-          </Link>
-        </div>
+      <div className="px-5 mt-5 d-flex justify-content-center">
         <div className="col-8 mb-3">
           <div className="card mb-3" key={postObject.id}>
-            <img
-              src={`http://localhost:8080/uploads/${postObject.media}`}
-              className="card-img-top display-img"
-              alt=""
-            />
+            {postObject.media?.endsWith(".mp4") ? (
+              <video width="100%" controls src={`http://localhost:8080/uploads/${postObject.media}`} />
+            ) : (
+              <img
+                src={`http://localhost:8080/uploads/${postObject.media}`}
+                className="display-img"
+                style={{ width: "50%", objectFit: "cover" }} // Set the image width to 50%
+                alt=""
+              />
+            )}
             <div className="card-body">
               <p>{postObject.id}</p>
               <h2 className="card-title">{postObject.message}</h2>
@@ -104,7 +106,10 @@ function PostDetails() {
                   "dddd, MMMM Do YYYY, h:mm:ss a"
                 )}
               </p>
-              <p className="card-text">@{user.username}</p>
+              <div className="d-flex align-items-center">
+                <ProfilePicture imageUrl={`http://localhost:8080/uploads/${user.image}`} />
+                <p className="card-text ms-3">@{user.username}</p>
+              </div>
             </div>
           </div>
           <div className="card mb-3 p-3">

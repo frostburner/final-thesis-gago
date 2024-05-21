@@ -2,7 +2,9 @@ const express = require('express');
 const app = express();
 const db = require('./models');
 const cors = require('cors');
+const compression = require('compression');
 
+app.use(compression());
 app.use(express.json());
 app.use(cors());
 

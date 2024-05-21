@@ -1,24 +1,40 @@
-import React, { useContext, useState } from 'react'
-import { AuthContext } from '../../Helpers/AuthContext'
-import {useNavigate, Link } from 'react-router-dom';
-import Navbar from '../../Components/Navbar/Navbar';
-import axios from 'axios';
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../../Helpers/AuthContext";
+import { useNavigate, Link } from "react-router-dom";
+import Navbar from "../../Components/Navbar/Navbar";
+import axios from "axios";
 
 function EventsAdd() {
   const navigate = useNavigate();
+  const [alert, setAlert] = useState(null);
   const {authState, setAuthState} = useContext(AuthContext);
   const [formData, setFormData] = useState({
-    title:"",
-    description:"",
+    title: "",
+    description: "",
     image: null,
     quantity: "",
     price: "",
+    eventdate: "",
+    location: "",
   });
+
+  const closeAlert = () => {
+    setAlert(null);
+  };
 
   const id = authState.id;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    const emptyFields = Object.values(formData).some((field) => !field);
+    if (emptyFields) {
+      setAlert({
+        type: "danger",
+        message: "Please fill in all required fields.",
+      });
+      return;
+    }
 
     const newFormData = new FormData();
     newFormData.append("title", formData.title);
@@ -27,15 +43,26 @@ function EventsAdd() {
     newFormData.append("image", formData.image);
     newFormData.append("quantity", formData.quantity);
     newFormData.append("price", formData.price);
+    newFormData.append("eventdate", formData.eventdate);
+    newFormData.append("location", formData.location);
 
       try {
         const response = await axios.post("http://localhost:8080/events/", newFormData);
         console.log(response.data);
-        navigate(0)
-      } catch (error) {
-        console.log(error)
-    };
-  }
+      setAlert({ type: "success", message: "Event created successfully!" });
+      setTimeout(() => {
+        navigate("/eventslist");
+      }, 1500);
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setAlert({ type: "danger", message: "Error creating event." });
+      }
+    }
+  };
 
   const handleFileChange = (event) => {
     setFormData({ ...formData, image: event.target.files[0] });
@@ -69,6 +96,10 @@ function EventsAdd() {
             <input type="text" name="description" className="form-control" placeholder="Enter Description" value={formData.description} onChange={handleChange}/>
           </div>
           <div className="mb-3">
+            <label>Location</label>
+            <input type="text" name="location" className="form-control" placeholder="Enter Location" value={formData.location} onChange={handleChange}/>
+          </div>
+          <div className="mb-3">
             <label>Ticket Quantity</label>
             <input type="number" name="quantity" className="form-control" placeholder="Enter Ticket Quantity" value={formData.quantity} onChange={handleChange}/>
           </div>
@@ -76,6 +107,16 @@ function EventsAdd() {
             <label>Price</label>
             <input type="number" name="price" className="form-control" placeholder="Price" value={formData.price} onChange={handleChange}/>
           </div>
+          <div className="col">
+                <label className="form-label">Event Date</label>
+                <input
+                  type="date"
+                  name="eventdate"
+                  className="form-control"
+                  value={formData.eventdate}
+                  onChange={handleChange}
+                />
+              </div>
           <div className="mb-3">
             <label>Image</label>
             <input type="file" name="image" className="form-control" placeholder="Upload Image" onChange={handleFileChange}/>
@@ -85,7 +126,7 @@ function EventsAdd() {
       </div>
     </div>
     </>
-  )
+  );
 }
 
-export default EventsAdd
+export default EventsAdd;

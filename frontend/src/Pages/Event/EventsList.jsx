@@ -1,12 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
+import moment from "moment";
+import { AuthContext } from "../../Helpers/AuthContext";
 import "./event-css.css"
 
 function EventsList() {
-  const [allEvents, setAllEvents] = useState([]);
   const navigate = useNavigate();
+  const { authState } = useContext(AuthContext);
+  const [allEvents, setAllEvents] = useState([]);
+  const [alert, setAlert] = useState(null);
+
+  const closeAlert = () => {
+    setAlert(null);
+  };
 
   useEffect(() => {
     axios
@@ -24,8 +32,15 @@ function EventsList() {
     <>
     <Navbar />
     <div className="mt-5 mb-3 px-5">
-      <div className=""><button className="mb-3" onClick={(() => navigate('/eventadd'))}>Create Event</button></div>
+    {authState.role === 2 && ( // Show create event button only for event organizers
+          <div className="">
+            <button className="mb-3" onClick={() => navigate("/eventadd")}>
+              Create Event
+            </button>
+          </div>
+        )}
       <div className="row">
+        <h3>Upcoming Events</h3>
         {allEvents.map((event) => (
           <div className="col-sm-4" key={event.id}>
             <div className="card mb-3">
@@ -36,7 +51,10 @@ function EventsList() {
               />
               <div className="card-body">
                 <h2 className="card-title">{event.title}</h2>
-                <p className="card-text">{event.eventuser.username}</p>
+                <p className="card-text">
+                    {moment(event.eventdate).format("MMMM Do YYYY")}
+                  </p>
+                <p className="card-text">{event.eventuser?.username}</p>
                 <button
                   onClick={() => navigate(`/eventdetails/${event.id}`)}
                   className="bg-primary"
@@ -51,7 +69,7 @@ function EventsList() {
     </div>  
 
     </>
-  )
+  );
 }
 
-export default EventsList
+export default EventsList;

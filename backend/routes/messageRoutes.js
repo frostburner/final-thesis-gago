@@ -22,7 +22,13 @@ router.post('/', async (req, res) => {
 // Get all messages
 router.get('/', async (req, res) => {
   try {
-    const messages = await Messages.findAll();
+    const { ConversationId } = req.query;
+    let messages;
+    if (ConversationId) {
+      messages = await Messages.findAll({ where: { ConversationId } });
+    } else {
+      messages = await Messages.findAll();
+    }
     res.json(messages);
   } catch (error) {
     console.error('Error fetching messages:', error);

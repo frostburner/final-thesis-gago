@@ -88,7 +88,9 @@ router.get("/viewBy/:id", async (req, res) => {
     });
 
     if (!products || products.length === 0) {
-      return res.status(404).json({ error: "No products found for the specified user" });
+      return res
+        .status(404)
+        .json({ error: "No products found for the specified user" });
     }
 
     res.status(200).json(products);
@@ -98,45 +100,50 @@ router.get("/viewBy/:id", async (req, res) => {
   }
 });
 
-// UPDATING OF PRODUCTS WITHOUT UPDATING THE IMAGE
-router.put("/update/:id", async (req, res) => {
+// UPDATING OF PRODUCTS ARI MAY IMAGE NA
+router.put("/update/:id", upload.single("image"), async (req, res) => {
   const id = req.params.id;
-  const { name, description, quantity, price} = req.body;
+  const { name, description, quantity, price } = req.body;
+  const image = req.file ? req.file.filename : null;
 
   try {
-      const product = await Products.findByPk(id);
+    const updatedProduct = await Products.findByPk(id);
 
-      if (!product) {
-          return res.status(404).json({ error: "product not found."});
-      }
-      product.name = name;
-      product.description = description;
-      product.quantity = quantity;
-      product.price = price;
+    if (!updatedProduct) {
+      return res.status(404).json({ error: "Product not found." });
+    }
+    updatedProduct.name = name;
+    updatedProduct.description = description;
+    updatedProduct.quantity = quantity;
+    updatedProduct.price = price;
+    updatedProduct.image = image;
+    if (image) {
+      updatedProduct.image = image;
+    }
 
-      await product.save();
-      res.json(product);
+    await updatedProduct.save();
+    res.json(updatedProduct);
   } catch (error) {
-      console.error("Error updating product:", error);
-      res.status(500).json({ error: "Internal server error"});
+    console.error("Error updating product:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
 // DELETE BY ID sheesh escodero
-router.delete('/:id', async(req,res)=>{
+router.delete("/:id", async (req, res) => {
   const id = req.params.id;
 
-  try{
-      const product = await Products.findByPk(id);
+  try {
+    const product = await Products.findByPk(id);
 
-      if(product){
-          await product.destroy();
-          res.status(204).send();
-      }
-  }catch(error){
-      console.log(error);
-      res.status(500).json({error: error.message});
+    if (product) {
+      await product.destroy();
+      res.status(204).send();
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.message });
   }
-})
+});
 
 module.exports = router;

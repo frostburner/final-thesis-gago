@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
-import "./store-css.css"
+import "./store-css.css";
 
 const Store = () => {
   const [allProducts, setAllProducts] = useState([]);
@@ -25,19 +25,25 @@ const Store = () => {
   return (
     <>
       <Navbar />
-      <div className="px-5 mt-5"><button className="mb-3" onClick={(() => navigate('/productadd'))}>Sell Merch</button></div>
-      <div className="row px-5">
+      <div>
+        <div className="px-5 mt-3">
+          <h3 className="fw-bold">Merch Store</h3>
+          <hr />
+        </div>
+      </div>
+      <div className="d-flex flex-wrap px-5 mt-3 align-items-center">
         {allProducts.map((product) => (
-          <div className="col-sm-4" key={product.id}>
-            <div className="card mb-3">
+          <div className="col-md-4 mb-3 px-2" key={product.id}>
+            <div className="card">
               <img
                 src={`http://localhost:8080/uploads/${product.image}`}
-                className="card-img-top card-img" 
+                className="card-img-top card-img"
                 alt=""
               />
               <div className="card-body">
                 <h2 className="card-title">{product.name}</h2>
-                <p className="card-text">{product.user.username}</p>
+                <h4>&#8369;{product.price}</h4>
+                <p className="card-text">Product by: {product.user.username}</p>
                 <button
                   onClick={() => navigate(`/storedetails/${product.id}`)}
                   className="bg-primary"
