@@ -65,7 +65,7 @@ const Signup = () => {
   };
 
   const accountOptions = [
-    { value: 0, label: "Admin" },
+    // { value: 0, label: "Admin" },
     { value: 1, label: "Artist" },
     { value: 2, label: "Organizer" },
   ];

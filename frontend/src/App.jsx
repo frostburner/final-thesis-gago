@@ -45,10 +45,10 @@ function App() {
   });
 
   useEffect(() => {
-    // Check if there is an access token in local storage
+    
     const accessToken = localStorage.getItem("accessToken");
     if (!accessToken) {
-      // No access token, set authState accordingly
+  
       setAuthState({
         ...authState,
         status: false,
@@ -56,7 +56,7 @@ function App() {
       return;
     }
 
-    // Fetch user information from the server
+  
     axios
       .get("http://localhost:8080/users/auth", {
         headers: {
@@ -65,13 +65,13 @@ function App() {
       })
       .then((response) => {
         if (response.data.error) {
-          // If there is an error, set authState accordingly
+          
           setAuthState({
             ...authState,
             status: false,
           });
         } else {
-          // If successful, update authState with user information
+          
           setAuthState({
             id: response.data.id,
             username: response.data.username,
@@ -82,7 +82,7 @@ function App() {
       })
       .catch((error) => {
         console.error("An unexpected error occurred:", error);
-        // Handle other types of errors (network issues, server down, etc.)
+        
       });
   }, []);
   return (
@@ -95,7 +95,7 @@ function App() {
           <Route path="/profile/:id" exact element={<Profile />} />
           <Route path="/profile/edit/:id" exact element={<EditProfile/>} />
 
-          {/* STORE */}
+         
           <Route path="/store" exact element={<Store />} />
           <Route path="/storecheckout/:id" exact element={<StoreCheckout />} />
           <Route
@@ -105,13 +105,13 @@ function App() {
           />
           <Route path="/storedetails/:id" exact element={<StoreDetails />} />
 
-          {/* STORE PRODUCTS ADD, UPDATE, DISPLAYBY USERID */}
+         
           <Route path="/productslist" exact element={<ProductsList />} />
           <Route path="/productadd" exact element={<ProductsAdd />} />
           <Route path="/productbyuser" exact element={<ProductsByUser />} />
           <Route path="/productupdate/:id" exact element={<ProductsUpdate />} />
 
-          {/* EVENT ADD, UPDATE, DISPLAY BY USERID */}
+        
           <Route path="/eventslist" exact element={<EventsList />} />
           <Route path="/eventadd" exact element={<EventsAdd />} />
           <Route path="/eventdetails/:id" exact element={<EventDetails />} />
@@ -120,19 +120,19 @@ function App() {
           <Route path="/eventbyuser" exact element={<EventByUser />} />
           <Route path="/eventupdate/:id" exact element={<EventUpdates />} />
 
-          {/* POST ADD, UPDATE, DISPLAY BY USERID */}
+      
           <Route path="/postdetails/:PostId" exact element={<PostDetails />} />
-        {/* SEARCH BAR*/}
+     
         <Route path="/userlist" element={<UserList />} />
 
-          {/*CHAT*/}
+      
           <Route path="/chat/:id" exact element={<Chat />} />
           <Route path="/addgroup" exact element={<AddGroup />} />
           <Route path="/allgroup" exact element={<AllGroup />} />
-          {/* <Route path="/chatuser" exact element={<ChatUser/>} /> */}
+          
           <Route path="/conversations/chat/:id" exact element={<ChatUser /> } />
 
-          {/* ADMIN */}
+        
           <Route path="/adminDashboard" exact element={<AdminDashboard />} />
           <Route path="/displayUser" exact element={<DisplayUser />} />
           <Route path="/createUser" exact element={<CreateUser />} />
